@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "./navbar.module.scss"
 
 
@@ -5,12 +6,12 @@ import styles from "./navbar.module.scss"
 const Navbar = () => {
 
     return(
-    <div className={styles.navbar}>
-        <div className={styles.navbar__logo}>
+    <header className={styles.navbar}>
+        <NavLink to='/' className={styles.navbar__logo}>
             <img alt='lechlogo' src={require("../../assets/Save the Arts 1.png")}/>
-        </div>
+        </NavLink>
         
-    </div>
+    </header>
     )
 }
 

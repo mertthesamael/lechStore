@@ -12,7 +12,7 @@ const Home = () => {
     useEffect(() => {
         setTimeout(() => {
            setFade(true) 
-        }, 1000);
+        }, 500);
     },[])
 
     return(
@@ -22,15 +22,15 @@ const Home = () => {
                 <h1>There will be some coool fuckin <span>CTA TEXT !</span></h1>
                 </Fade>
 
+                <div className={styles.home__welcomer__logo}>
+                    <img src={require("../../assets/0a76842e-7377-4517-af56-68aac2b41682.png")}/>
+                </div>
             </div>
             <div className={styles.home__cta}>
                 <div className={styles.home__cta__button}>
                    <Card/>
                 
 
-                </div>
-                <div className={styles.home__cta__logo}>
-                    <img src={require("../../assets/0a76842e-7377-4517-af56-68aac2b41682.png")}/>
                 </div>
             </div>
         </div>

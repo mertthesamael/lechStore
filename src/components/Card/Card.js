@@ -8,12 +8,15 @@ import {
     Stack,
     Image,
   } from '@chakra-ui/react';
+import { NavLink } from 'react-router-dom';
   
   const IMAGE =
     'https://cdn.dsmcdn.com/mnresize/-/-//ty572/product/media/images/20221018/22/196846967/600147139/1/1_org_thumb.jpg';
   
   export default function Card() {
     return (
+        <NavLink to='/products'>
+
       <Center py={12}>
         <Box
           role={'group'}
@@ -31,21 +34,21 @@ import {
             pos={'relative'}
             height={'230px'}
             _after={{
-              transition: 'all .3s ease',
-              content: '""',
-              w: 'full',
-              h: 'full',
-              pos: 'absolute',
-              top: 5,
-              left: 0,
-              backgroundImage: `url(${IMAGE})`,
-              filter: 'blur(15px)',
-              zIndex: -1,
+                transition: 'all .3s ease',
+                content: '""',
+                w: 'full',
+                h: 'full',
+                pos: 'absolute',
+                top: 5,
+                left: 0,
+                backgroundImage: `url(${IMAGE})`,
+                filter: 'blur(15px)',
+                zIndex: -1,
             }}
             _groupHover={{
-              _after: {
-                filter: 'blur(20px)',
-              },
+                _after: {
+                    filter: 'blur(20px)',
+                },
             }}>
             <Image
               rounded={'lg'}
@@ -53,7 +56,7 @@ import {
               width={282}
               objectFit={'cover'}
               src={IMAGE}
-            />
+              />
           </Box>
           <Stack pt={10} align={'center'}>
             <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
@@ -73,5 +76,6 @@ import {
           </Stack>
         </Box>
       </Center>
+              </NavLink>
     );
   }

@@ -1,7 +1,14 @@
+@use "../../style/global.scss" as *;
 
 
 .products{
-    width: 100vw;
-    height: 100vh;
-    background-color: orange;
+    min-height: 100%;
+    height: max-content;
+    background-color: $lech-primary;
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    overflow: auto;
+    flex-wrap: wrap;
+    padding-top: 5rem;
 }

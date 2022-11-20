@@ -10,11 +10,19 @@
     &__welcomer{
     
         height: max-content;
+        min-height: 100%;
         display: flex;
         width: 100%;
         font-size: 80px;
         color: white;
         padding: 10rem 5rem;
+        justify-content: space-between;
+        flex-direction: column;
+        &__logo{
+            & img{
+                height: 200px;
+            }
+        }
         & span{
             text-decoration:underline;
 
@@ -27,17 +35,12 @@
         width: 100%;
         font-size: 80px;
         color: white;
-        padding: 0rem 5rem 10rem 5rem;
+        padding: 10rem 5rem;
         flex-direction: column;
         justify-content: flex-end;
         align-items: center;
 
-        &__logo{
-
-            & img{
-                height: 200px;
-            }
-        }
+      
 
     }
 }
