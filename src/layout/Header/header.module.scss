@@ -1,0 +1,8 @@
+@use "../../style/global.scss" as *;
+
+.header{
+    height: $header-height;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,15 @@
+@use '../../style/global.scss' as *;
+.navbar{
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &__logo{
+
+        & img{
+          height: 90px;
+        }
+    }
+}
