@@ -1,0 +1,10 @@
+.select{
+
+    & .chakra-menu__menu-list{
+        display: flex!important;
+        padding: 0;
+        & button{
+            width: max-content;
+        }
+    }
+}

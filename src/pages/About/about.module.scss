@@ -1,0 +1,21 @@
+@use "../../style/global.scss" as *;
+
+
+.about{
+    height: 100%;
+    background-color: $lech-primary;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    &__wrapper{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        justify-content: center;
+        justify-content: space-between;
+        height: 50%;
+        width: 50%;
+    }
+}

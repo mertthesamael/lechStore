@@ -7,6 +7,7 @@ import Profile from "./pages/Profile/Profile";
 import Wrapper from "./layout/Wrapper/Wrapper";
 import Header from "./layout/Header/Header";
 import Body from "./layout/Body/Body";
+import Item from "./pages/Item/Item";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
 
       <Route path="/about" element={<About />} />
+      <Route path="/item" element={<Item />} />
 
       <Route path="/profile" element={<Profile />} />
       </Routes>

@@ -15,7 +15,7 @@ import { NavLink } from 'react-router-dom';
   
   export default function Card() {
     return (
-        <NavLink to='/products'>
+        <NavLink to='/item'>
 
       <Center py={12}>
         <Box

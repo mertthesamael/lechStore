@@ -1,0 +1,51 @@
+.product{
+    background-color: white;
+    width: 70%;
+    height:80%;
+    border-radius:40px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    overflow: auto;
+    &__left{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__right{
+        display: flex;
+        width: 100%;
+        padding-top: 8rem;
+        flex-direction: column;
+        position: relative;
+
+        &__wrapper{
+            width: 70%;
+            position: relative;
+            display: flex;
+            height: 75%;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+        &__title{
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        &__select{
+            display: flex;
+        }
+        &__desc{
+           
+        }
+        &__cta{
+            display: flex;
+            align-items: center;
+            bottom: 10rem;
+            left: 20rem;
+            justify-content: flex-end;
+            
+        }
+    }
+}

@@ -1,0 +1,11 @@
+@use "../../style/global.scss" as *;
+
+
+.item{
+    height: 100%;
+    background-color: $lech-primary;
+    display: flex;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+}
