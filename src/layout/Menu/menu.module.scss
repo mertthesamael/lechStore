@@ -1,0 +1,21 @@
+.menu{
+    position: absolute;
+    width: 20rem;
+    background-color: orange;
+    left: 0;
+    height: 100%;
+    transition:all 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    &__items{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: max-content;
+        height: 100%;
+    }
+}
+

@@ -1,8 +1,8 @@
 import { Box, Text } from "@chakra-ui/react";
 import styles from "./about.module.scss"
-import { faFacebook, faInstagram, faGithub} from '@fortawesome/free-brands-svg-icons' ;
+import { faInstagram, faGithub} from '@fortawesome/free-brands-svg-icons' ;
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+
 const About = () => {
 
     return(

@@ -8,27 +8,26 @@ import Wrapper from "./layout/Wrapper/Wrapper";
 import Header from "./layout/Header/Header";
 import Body from "./layout/Body/Body";
 import Item from "./pages/Item/Item";
+import Menu from "./layout/Menu/Menu";
+import { LechContextWrapper } from "./store/context";
 
 const App = () => {
   return (
-    <Wrapper>
-      <Header />
-      <Body>
-        <Routes>
-
-      <Route path="/products" element={<Products />} />
-
-      <Route path="/" element={<Home />} />
-
-      <Route path="/about" element={<About />} />
-      <Route path="/item" element={<Item />} />
-
-      <Route path="/profile" element={<Profile />} />
-      </Routes>
-
-      </Body>
-
-    </Wrapper>
+    <LechContextWrapper>
+      <Wrapper>
+        <Menu />
+        <Header />
+        <Body>
+          <Routes>
+            <Route path="/products" element={<Products />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/item" element={<Item />} />
+            <Route path="/profile" element={<Profile />} />
+          </Routes>
+        </Body>
+      </Wrapper>
+    </LechContextWrapper>
   );
 };
 
