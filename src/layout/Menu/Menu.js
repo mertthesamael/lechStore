@@ -8,7 +8,6 @@ import styles from "./menu.module.scss"
 const Menu = () => {
    
     const ctx = useContext(LechContext)
-    console.log(ctx)
     const stateHandler = () => {
         return(ctx.onMenuState(false))
     }

@@ -3,6 +3,7 @@ import styles from "./Home.module.scss"
 import { Fade, ScaleFade, Slide, SlideFade } from '@chakra-ui/react'
 import { useEffect, useState } from "react";
 import Card from "../../components/Card/Card";
+import Spline from "@splinetool/react-spline";
 
 
 const Home = () => {
@@ -28,9 +29,7 @@ const Home = () => {
             </div>
             <div className={styles.home__cta}>
                 <div className={styles.home__cta__button}>
-                   <Card/>
-                
-
+                   <Card img='https://cdn.dsmcdn.com/mnresize/-/-//ty572/product/media/images/20221018/22/196846967/600147139/1/1_org_thumb.jpg'/>
                 </div>
             </div>
         </div>

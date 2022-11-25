@@ -13,7 +13,7 @@ import { NavLink } from 'react-router-dom';
   const IMAGE =
     'https://cdn.dsmcdn.com/mnresize/-/-//ty572/product/media/images/20221018/22/196846967/600147139/1/1_org_thumb.jpg';
   
-  export default function Card() {
+  export default function Card({img}) {
     return (
         <NavLink to='/item'>
 
@@ -22,7 +22,7 @@ import { NavLink } from 'react-router-dom';
           role={'group'}
           p={6}
           maxW={'330px'}
-          w={'full'}
+          w={'90%'}
           bg={useColorModeValue('white', 'gray.800')}
           boxShadow={'2xl'}
           rounded={'lg'}
@@ -41,7 +41,7 @@ import { NavLink } from 'react-router-dom';
                 pos: 'absolute',
                 top: 5,
                 left: 0,
-                backgroundImage: `url(${IMAGE})`,
+                backgroundImage: `url(${img})`,
                 filter: 'blur(15px)',
                 zIndex: -1,
             }}
@@ -55,7 +55,7 @@ import { NavLink } from 'react-router-dom';
               height={230}
               width={282}
               objectFit={'cover'}
-              src={IMAGE}
+              src={img}
               />
           </Box>
           <Stack pt={10} align={'center'}>
@@ -66,10 +66,10 @@ import { NavLink } from 'react-router-dom';
               AŞURFMAN ÇAKMA NİKE
             </Heading>
             <Stack direction={'row'} align={'center'}>
-              <Text color='black' fontWeight={800} fontSize={'s'}>
+              <Text color='black' fontWeight={800} fontSize={'3xl'}>
                 0.5ETH
               </Text>
-              <Text fontSize={'4xl'} textDecoration={'line-through'} color={'gray.600'}>
+              <Text fontSize={'2xl'} textDecoration={'line-through'} color={'gray.600'}>
                 2ETH
               </Text>
             </Stack>

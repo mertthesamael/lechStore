@@ -10,6 +10,7 @@ import Body from "./layout/Body/Body";
 import Item from "./pages/Item/Item";
 import Menu from "./layout/Menu/Menu";
 import { LechContextWrapper } from "./store/context";
+import Login from "./pages/Login/Login";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/item" element={<Item />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Body>
       </Wrapper>

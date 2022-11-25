@@ -1,0 +1,27 @@
+@use "../../style/global.scss" as *;
+
+
+.login{
+    height: 100%;
+    background-color: $lech-primary;
+    display: flex;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    &__wrapper{
+        width: 25%;
+        min-height: 50%;
+        padding: 5rem 5rem;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        & h1{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+      
+    }
+}

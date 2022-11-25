@@ -1,5 +1,3 @@
-import { Image, Text } from "@chakra-ui/react";
-import { ethers } from "ethers";
 import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { LechContext } from "../../store/context";
@@ -49,7 +47,7 @@ const Navbar = () => {
                 <img src={require("../../assets/metamask.png")}/>
             </div>
             <div className={styles.navbar__connect__button__text}>
-            <h1>{ctx.userAddr? ctx.userAddr :'Connect'}</h1>
+            <h1>{ctx.connected? ctx.userAddr :'Connect'}</h1>
             </div>
         </div>
       </div>
