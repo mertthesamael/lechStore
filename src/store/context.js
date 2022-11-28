@@ -15,7 +15,21 @@ export const LechContextWrapper = (props) => {
     const [connected, setConnected] = useState(false)
     const [userAddr, setUserAddr] = useState("")
     const [users, setUsers] = useState()
-    
+    const newUser = (e, name, mail, phone) => {
+        e.preventDefault()
+        const dt = new Date()
+        console.log(name, mail)
+        addDoc(collection(db,'Users'),{
+            addr:userAddr,
+            balance:null,
+            cart:[],
+            signDate: dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear(),
+            tsx:[],
+            contact:[{mail:mail},{phone:phone}],
+            name:name
+
+        })
+    }
     //Main web3 connection function
     const web3Connect = async () => {
         const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -25,17 +39,18 @@ export const LechContextWrapper = (props) => {
         let account = accounts[0];
         const connectedAddress = await signer.getAddress()
         setUserAddr(account)
-        users?.map( (user) =>{
-            if(user.addr == connectedAddress){
-                console.log("This address registered on db")
-            setConnected(true)
+        setConnected(true)
+        // users?.map( (user) =>{
+        //     if(user.addr == connectedAddress){
+        //         console.log("This address registered on db")
+        //     setConnected(true)
 
-            }
-            else{
-                console.log("This address did not registered on db")
-                setConnected(false)
-            }
-        })
+        //     }
+        //     else{
+        //         console.log("This address did not registered on db")
+        //         setConnected(false)
+        //     }
+        // })
     }
 
     //Setting current addr on change
@@ -67,7 +82,8 @@ export const LechContextWrapper = (props) => {
             onMenuState:menuStateHandler,
             web3Connect:web3Connect,
             userAddr:userAddr,
-            connected:connected
+            connected:connected,
+            newUser:newUser
             }}>
 
             {props.children}

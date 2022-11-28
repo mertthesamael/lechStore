@@ -1,40 +1,32 @@
 import { Box, Button, FormControl, Image, Input, Text } from "@chakra-ui/react";
 import styles from "./login.module.scss";
-import { db } from "../../config/firestore";
 import { useContext, useEffect, useState } from "react";
-import {
-  collection,
-  addDoc,
-  onSnapshot,
-  query,
-} from "firebase/firestore";
 import { Form, Formik } from "formik";
 import { LechContext } from "../../store/context";
 
 const Login = () => {
+   
     const ctx = useContext(LechContext)
   const formHandler = (e) => {
+    console.log(e.target.name.value)
     e.preventDefault();
     console.log("Form submitted");
+    ctx.newUser(e,e.target.name.value,e.target.email.value,e.target.phone.value)
   };
 
-  const [users, setUsers] = useState();
+  
+  
+  const [inputName, setInputName] = useState('')
+  const [inputMail, setInputMail] = useState('')
+  const [inputNumber, setInputNumber] = useState('')
+  const loginPhase = () => {
+    ctx.web3Connect()
+  };
+  const isErrorName = inputName === ''
+  const isErrorMail = inputMail === ''
+  const isErrorNumber = inputNumber === ''
+  
 
-  const loginPhase = () => {};
-  useEffect(() => {
-    const usersCollection = query(collection(db, "Users"));
-
-    onSnapshot(usersCollection, (snapshot) => {
-      setUsers(
-        snapshot.docs.map((user) => {
-          return {
-            addr: user.addr,
-            ...user.data(),
-          };
-        })
-      );
-    });
-  }, []);
 
   return (
     <div className={styles.login}>
@@ -57,9 +49,9 @@ const Login = () => {
                 ></Image>
                 <h1>{ctx.connected?ctx.userAddr:'Connect'}</h1>
               </Button>
-              <Input placeholder="name"></Input>
-              <Input placeholder="e-mail"></Input>
-              <Input placeholder="phone"></Input>
+              <Input isInvalid={isErrorName} onChange={(e) => setInputName(e.target.value)} value={inputName} name="name" placeholder="name"></Input>
+              <Input isInvalid={isErrorMail} onChange={(e) => setInputMail(e.target.value)} value={inputMail} name="email" placeholder="e-mail"></Input>
+              <Input isInvalid={isErrorNumber} onChange={(e) => setInputNumber(e.target.value)} value={inputNumber} name="phone" placeholder="phone" type={'tel'}></Input>
               <Button
                 type="submit"
                 _hover={{
