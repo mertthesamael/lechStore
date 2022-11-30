@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import  { collection, addDoc, onSnapshot, query, orderBy } from "firebase/firestore";
 import { db } from "../config/firestore";
+import { useNavigate } from "react-router-dom";
 
 const LechContext = React.createContext({
     emptyValue:''
@@ -10,7 +11,7 @@ const LechContext = React.createContext({
 
 export const LechContextWrapper = (props) => {
 
-
+    const navigate = useNavigate()
     const [menuState, setMenuState] = useState(false)
     const [connected, setConnected] = useState(false)
     const [userAddr, setUserAddr] = useState("")
@@ -18,7 +19,6 @@ export const LechContextWrapper = (props) => {
     const newUser = (e, name, mail, phone) => {
         e.preventDefault()
         const dt = new Date()
-        console.log(name, mail)
         addDoc(collection(db,'Users'),{
             addr:userAddr,
             balance:null,
@@ -40,7 +40,13 @@ export const LechContextWrapper = (props) => {
         const connectedAddress = await signer.getAddress()
         setUserAddr(account)
         setConnected(true)
+        if(users?.find(x=>x.addr === connectedAddress) === undefined){
+            console.log("This address did not registered on db")
+            setConnected(true)
+            navigate('/login')
+        }
         // users?.map( (user) =>{
+        //     console.log(user.addr)
         //     if(user.addr == connectedAddress){
         //         console.log("This address registered on db")
         //     setConnected(true)
@@ -48,15 +54,16 @@ export const LechContextWrapper = (props) => {
         //     }
         //     else{
         //         console.log("This address did not registered on db")
-        //         setConnected(false)
+        //     setConnected(true)
+                
+        //         navigate('/login')
         //     }
         // })
     }
 
     //Setting current addr on change
     useEffect(() => {
-        web3Connect()
-
+        
         const usersCollection = query(collection(db, "Users"));
 
         onSnapshot(usersCollection, (snapshot) => {

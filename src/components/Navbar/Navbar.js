@@ -1,20 +1,21 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { LechContext } from "../../store/context";
 import styles from "./navbar.module.scss";
 
 const Navbar = () => {
   const ctx = useContext(LechContext);
+  const navigate = useNavigate();
   const menuHandler = () => {
     return ctx.onMenuState(!ctx.menuState);
   };
 
   const connect = async () => {
-    
+
     ctx.web3Connect()
    
   }
-
+  
   //useEffect hook for closing menu on blur
   useEffect(() => {
     const startEvent = (e) => {
@@ -44,7 +45,7 @@ const Navbar = () => {
       <div className={styles.navbar__connect}>
         <div onClick={connect} className={styles.navbar__connect__button}>
             <div className={styles.navbar__connect__button__icon}>
-                <img src={require("../../assets/metamask.png")}/>
+              <img src={require("../../assets/metamask.png")}/>
             </div>
             <div className={styles.navbar__connect__button__text}>
             <h1>{ctx.connected? ctx.userAddr :'Connect'}</h1>
