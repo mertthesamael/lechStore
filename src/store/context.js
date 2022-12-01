@@ -40,44 +40,10 @@ export const LechContextWrapper = (props) => {
         const connectedAddress = await signer.getAddress()
         setUserAddr(account)
         setConnected(true)
-        if(users?.find(x=>x.addr === connectedAddress) === undefined){
-            console.log("This address did not registered on db")
-            setConnected(true)
-            navigate('/login')
-        }
-        // users?.map( (user) =>{
-        //     console.log(user.addr)
-        //     if(user.addr == connectedAddress){
-        //         console.log("This address registered on db")
-        //     setConnected(true)
-
-        //     }
-        //     else{
-        //         console.log("This address did not registered on db")
-        //     setConnected(true)
-                
-        //         navigate('/login')
-        //     }
-        // })
+        
     }
 
-    //Setting current addr on change
-    useEffect(() => {
-        
-        const usersCollection = query(collection(db, "Users"));
-
-        onSnapshot(usersCollection, (snapshot) => {
-          setUsers(
-            snapshot.docs.map((user) => {
-              return {
-                addr: user.addr,
-                ...user.data(),
-              };
-            })
-          );
-        });
-    },[])
-
+ 
 
     const menuStateHandler = (value) => {
         return setMenuState(value)

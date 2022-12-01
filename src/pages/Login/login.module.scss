@@ -10,18 +10,37 @@
     align-items: center;
     &__wrapper{
         width: 25%;
-        min-height: 50%;
-        padding: 5rem 5rem;
+        height: 60%;
+        padding: 5rem;
         background-color: white;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        
-        & h1{
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
+
+        &__ctaSignup{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+        &__form{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+
+           & form{
+            height: 70%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-between;
+            
+           }
+        }
+      
       
     }
 }

@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LechContext } from "../../store/context";
@@ -43,14 +44,24 @@ const Navbar = () => {
         <img alt="lechlogo" src={require("../../assets/Save the Arts 1.png")} />
       </NavLink>
       <div className={styles.navbar__connect}>
-        <div onClick={connect} className={styles.navbar__connect__button}>
+        {/* <div onClick={connect} className={styles.navbar__connect__button}>
             <div className={styles.navbar__connect__button__icon}>
               <img src={require("../../assets/metamask.png")}/>
             </div>
             <div className={styles.navbar__connect__button__text}>
             <h1>{ctx.connected? ctx.userAddr :'Connect'}</h1>
             </div>
-        </div>
+        </div> */}
+        <NavLink to='/login'>
+          <Button _hover={{
+                color: "#C31433",
+                backgroundColor: "RGBA(0, 0, 0, 0.16)",
+              }}
+              bgColor="#C31433"
+              color="white"
+              p='1rem 3rem'
+              >Login</Button>
+          </NavLink>
       </div>
     </header>
   );
