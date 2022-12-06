@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
 import { getFirestore } from "firebase/firestore"
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -8,7 +9,7 @@ import { getFirestore } from "firebase/firestore"
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIRESTORE__KEY,
+  apiKey: 'AIzaSyA9U395ckv4Vl6rIS_1HZxszNg-I-xEcVM',
   authDomain: "lech-store-43af0.firebaseapp.com",
   projectId: "lech-store-43af0",
   storageBucket: "lech-store-43af0.appspot.com",
@@ -21,7 +22,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 // const analytics = getAnalytics(app);
+const auth = getAuth()
+export const register = async (email, password,name) => {
+  try{
+
+    const {user} = await createUserWithEmailAndPassword(auth, email, password)
+    updateProfile(auth.currentUser,{
+      displayName:name
+    })
+    return user
+  }catch(err){
+    return err.message
+  }
+}
 
 export {
-    db
+    db,
+    app
 }
