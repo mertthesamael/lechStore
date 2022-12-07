@@ -1,4 +1,4 @@
-import { Checkbox, Input, Text } from "@chakra-ui/react";
+import { Checkbox, Input, Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { register } from "../../config/firestore";
 import "./signupform.module.scss";
@@ -6,13 +6,25 @@ import "./signupform.module.scss";
 const SignupForm = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [name, setName] = useState()
   const [error, setError] = useState({mail:false, password:false, msg:""});
+  const toast = useToast()
   const loginHandler = async (e) => {
     e.preventDefault();
     setEmail(e.target.mail.value)
     setPassword(e.target.password.value)
-    const user = await register(email, password, "Merto");
-    console.log(user);
+    setName(e.target.name.value)
+    const user = await register(email, password, name);
+    if(user.accessToken){
+      toast({
+        title: 'Account created.',
+        description: "We've created your account for you.",
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+        
+      })
+    }
     if (user.includes("Firebase")) {
       setError(user.replace("Firebase:", " "));
       if (user.includes("email")) {
@@ -30,7 +42,7 @@ const SignupForm = () => {
   return (
       <form onSubmit={loginHandler}>
         <Text>{error.msg}</Text>
-      <Input type="text" placeholder="Full Name"></Input>
+      <Input name='name' type="text" placeholder="Full Name"></Input>
       <Input isInvalid={error.mail} name='mail' type="mail" placeholder="Email Address"></Input>
       <Input isInvalid={error.password} name='password' type="password" placeholder="Password"></Input>
       <Input type="password" placeholder="Confirm Password"></Input>

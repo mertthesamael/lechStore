@@ -1,29 +1,28 @@
-import { Button } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
+import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { currentUser, logOut } from "../../config/firestore";
 import { LechContext } from "../../store/context";
 import styles from "./navbar.module.scss";
 
 const Navbar = () => {
-  const ctx = useContext(LechContext);
+  const {onMenuState, user, menuState, onSetUser} = useContext(LechContext);
   const navigate = useNavigate();
   const menuHandler = () => {
-    return ctx.onMenuState(!ctx.menuState);
+    return onMenuState(!menuState);
   };
 
-  const connect = async () => {
-
-    ctx.web3Connect()
-   
-  }
-  
+  const handleLogout = async () => {
+    await logOut();
+    onSetUser(currentUser,false);
+  };
   //useEffect hook for closing menu on blur
   useEffect(() => {
     const startEvent = (e) => {
       if (e.path[0].className.split(" ")[1] !== "menuicon") {
-        return ctx.onMenuState(false);
+        return onMenuState(false);
       } else {
-        return ctx.onMenuState(!ctx.menuState);
+        return onMenuState(!menuState);
       }
     };
     document.body.addEventListener("click", startEvent);
@@ -35,9 +34,7 @@ const Navbar = () => {
     <header className={styles.navbar}>
       <div onClick={menuHandler} className={styles.navbar__menu}>
         <div className={styles.navbar__menuwrapper + " menuicon"}>
-        <div className={styles.navbar__menu__bar + " menuicon"}>
-
-        </div>
+          <div className={styles.navbar__menu__bar + " menuicon"}></div>
         </div>
       </div>
       <NavLink to="/" className={styles.navbar__logo}>
@@ -52,16 +49,44 @@ const Navbar = () => {
             <h1>{ctx.connected? ctx.userAddr :'Connect'}</h1>
             </div>
         </div> */}
-        <NavLink to='/login'>
-          <Button _hover={{
+
+        {user.loggedIn ? (
+          <Menu>
+            <MenuButton
+              as={Button}
+              _hover={{
                 color: "#C31433",
                 backgroundColor: "RGBA(0, 0, 0, 0.16)",
               }}
               bgColor="#C31433"
               color="white"
-              p='1rem 3rem'
-              >Login</Button>
+              p="1rem 3rem"
+            >
+              {user?.name}
+              
+            </MenuButton>
+            <MenuList>
+              <MenuItem bgColor="white">Profile</MenuItem>
+              <MenuItem onClick={handleLogout} bgColor="white">
+                Sign Out
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        ) : (
+          <NavLink to="/login">
+            <Button
+              _hover={{
+                color: "#C31433",
+                backgroundColor: "RGBA(0, 0, 0, 0.16)",
+              }}
+              bgColor="#C31433"
+              color="white"
+              p="1rem 3rem"
+            >
+              Login
+            </Button>
           </NavLink>
+        )}
       </div>
     </header>
   );
