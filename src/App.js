@@ -9,10 +9,33 @@ import Header from "./layout/Header/Header";
 import Body from "./layout/Body/Body";
 import Item from "./pages/Item/Item";
 import Menu from "./layout/Menu/Menu";
-import { LechContextWrapper } from "./store/context";
+import { LechContext, LechContextWrapper } from "./store/context";
 import Login from "./pages/Login/Login";
+import { useContext, useEffect, useState } from "react";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { db } from "./config/firestore";
 
 const App = () => {
+//   const [producst, setProducts] = useState()
+//   const [productIds, setProductIds] = useState()
+//  useEffect(() => {
+//   const productsCollection = query(collection(db, 'Products'));
+        
+//   onSnapshot(productsCollection, (snapshot) => {
+     
+//       setProducts(snapshot.docs.map(product => {
+
+//           return {
+//               id:product.id,
+//               ...product.data()
+//           }
+
+//         }))
+     
+//   })
+//   setProductIds(producst?.map(product => product.id))
+//  },[])
+//  console.log(productIds)
   return (
     <LechContextWrapper>
       <Wrapper>
@@ -20,10 +43,11 @@ const App = () => {
         <Header />
         <Body>
           <Routes>
-            <Route path="/products" element={<Products />} />
+          
+            <Route path='/products'element={<Products />} />
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/item" element={<Item />} />
+            <Route path='/:id'element={<Item />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Login />} />

@@ -8,14 +8,29 @@ import {
     Stack,
     Image,
   } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
   
   const IMAGE =
     'https://cdn.dsmcdn.com/mnresize/-/-//ty572/product/media/images/20221018/22/196846967/600147139/1/1_org_thumb.jpg';
   
-  export default function Card({img}) {
+  export default function Card({img, item}) {
+  
+    
+    const {id, category, colors, description, discount, images, name, price:solidPrice, size, supply} = item
+
+    const [price, setPrice] = useState(solidPrice)
+
+    useEffect(() => {
+      if (discount.state){
+        setPrice((solidPrice) - ((discount.amount / 100) * solidPrice))
+      }
+      
+    },[])
+    
+
     return (
-        <NavLink to='/item'>
+        <NavLink to={'/'+id.replace(/\s+/g, '')}>
 
       <Center py={12}>
         <Box
@@ -41,7 +56,7 @@ import { NavLink } from 'react-router-dom';
                 pos: 'absolute',
                 top: 5,
                 left: 0,
-                backgroundImage: `url(${img})`,
+                backgroundImage: `url(${images[0].img})`,
                 filter: 'blur(15px)',
                 zIndex: -1,
             }}
@@ -55,7 +70,7 @@ import { NavLink } from 'react-router-dom';
               height={230}
               width={282}
               objectFit={'cover'}
-              src={img}
+              src={images[0].img}
               />
           </Box>
           <Stack pt={10} align={'center'}>
@@ -63,15 +78,17 @@ import { NavLink } from 'react-router-dom';
               Lech
             </Text>
             <Heading fontSize={'2xl'} fontFamily={'body'} color='black' fontWeight={500}>
-              AŞURFMAN ÇAKMA NİKE
+              {name}
             </Heading>
             <Stack direction={'row'} align={'center'}>
               <Text color='black' fontWeight={800} fontSize={'3xl'}>
-                0.5ETH
+                {price +" TRY"}
               </Text>
+              {discount.state &&
               <Text fontSize={'2xl'} textDecoration={'line-through'} color={'gray.600'}>
-                2ETH
+                {solidPrice+' TRY'}
               </Text>
+              }
             </Stack>
           </Stack>
         </Box>

@@ -4,18 +4,34 @@ import { Fade, ScaleFade, Slide, SlideFade } from '@chakra-ui/react'
 import { useEffect, useState } from "react";
 import Card from "../../components/Card/Card";
 import Spline from "@splinetool/react-spline";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { db } from "../../config/firestore";
 
 
 const Home = () => {
 
     const [fade, setFade] = useState(false)
-
+    const [products, setProducts] = useState()
     useEffect(() => {
         setTimeout(() => {
+        const productsCollection = query(collection(db, 'Products'));
+        onSnapshot(productsCollection, (snapshot) => {
+           
+            setProducts(snapshot.docs.map(product => {
+
+                return {
+                    id:product.id,
+                    ...product.data()
+                }
+  
+              }))
+           
+        })
+          
            setFade(true) 
         }, 500);
     },[])
-
+console.log(products)
     return(
         <div className={styles.home}>
             <div className={styles.home__welcomer}>
@@ -29,7 +45,7 @@ const Home = () => {
             </div>
             <div className={styles.home__cta}>
                 <div className={styles.home__cta__button}>
-                   <Card img='https://cdn.dsmcdn.com/mnresize/-/-//ty572/product/media/images/20221018/22/196846967/600147139/1/1_org_thumb.jpg'/>
+                  {products&&<Card item={products[0]}/>}
                 </div>
             </div>
         </div>

@@ -2,7 +2,9 @@
 
     & .chakra-menu__menu-list{
         display: flex!important;
+        justify-content: center;
         padding: 0;
+        width: max-content!important;
         & button{
             width: max-content;
         }

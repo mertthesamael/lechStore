@@ -42,9 +42,11 @@ export const register = async (email, password, name) => {
       password
     );
 
-    updateProfile(auth.currentUser, {
+    await updateProfile(auth.currentUser, {
       displayName: name,
     });
+    await signOut(auth)
+
     return user;
   } catch (err) {
     return err.message;
@@ -53,7 +55,6 @@ export const register = async (email, password, name) => {
 export const login = async (email, password) => {
   try {
     const { user } = await signInWithEmailAndPassword(auth, email, password);
-
     return user;
   } catch (err) {
     return err.message;

@@ -1,21 +1,37 @@
 import { Checkbox, Input, Text, useToast } from "@chakra-ui/react";
-import { useState } from "react";
-import { register } from "../../config/firestore";
+import { doc, setDoc } from "firebase/firestore";
+import { useContext, useState } from "react";
+import { register,db } from "../../config/firestore";
+import { LechContext } from "../../store/context";
 import "./signupform.module.scss";
 
 const SignupForm = () => {
+  const {onSetUser} = useContext(LechContext)
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [name, setName] = useState()
   const [error, setError] = useState({mail:false, password:false, msg:""});
   const toast = useToast()
-  const loginHandler = async (e) => {
+  const nameHandler = (e) =>{
+    setName(e.target.value)
+  }
+  const mailHandler = (e) => {
+    setEmail(e.target.value)
+  }
+  const passwordHandler = (e) => {
+    setPassword(e.target.value)
+  }
+  const signupHandler = async (e) => {
     e.preventDefault();
-    setEmail(e.target.mail.value)
-    setPassword(e.target.password.value)
-    setName(e.target.name.value)
     const user = await register(email, password, name);
     if(user.accessToken){
+      await onSetUser(user, true);
+      
+      await setDoc(doc(db,'Users', user.uid),{
+        uid:user.uid,
+        name:user.displayName,
+        email:user.email
+      })
       toast({
         title: 'Account created.',
         description: "We've created your account for you.",
@@ -40,11 +56,11 @@ const SignupForm = () => {
   };
 
   return (
-      <form onSubmit={loginHandler}>
+      <form onSubmit={signupHandler}>
         <Text>{error.msg}</Text>
-      <Input name='name' type="text" placeholder="Full Name"></Input>
-      <Input isInvalid={error.mail} name='mail' type="mail" placeholder="Email Address"></Input>
-      <Input isInvalid={error.password} name='password' type="password" placeholder="Password"></Input>
+      <Input onChange={nameHandler} name='name' type="text" placeholder="Full Name"></Input>
+      <Input onChange={mailHandler} isInvalid={error.mail} name='mail' type="mail" placeholder="Email Address"></Input>
+      <Input onChange={passwordHandler}isInvalid={error.password} name='password' type="password" placeholder="Password"></Input>
       <Input type="password" placeholder="Confirm Password"></Input>
       <Checkbox colorScheme="red">I've read the things idk</Checkbox>
       <Input

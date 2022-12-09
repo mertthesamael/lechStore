@@ -11,6 +11,9 @@
         width: 100%;
         justify-content: center;
         align-items: center;
+        & img{
+            height: 500px;
+        }
     }
 
     &__right{
@@ -47,5 +50,21 @@
             justify-content: flex-end;
             
         }
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .product{
+        
+        width: 90%;
+    }
+}
+@media screen and (max-width: 720px) {
+    .product{
+        
+        width: 90%;
+        height: 95%;
+        zoom: 0.9;
+        
     }
 }

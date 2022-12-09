@@ -22,9 +22,12 @@ const LoginForm = () => {
     setPassword(e.target.value);
   };
   const [error, setError] = useState("");
+
+
   const loginHandler = async (e) => {
     e.preventDefault();
     const user = await login(email, password);
+    
     if (user.accessToken) {
       await onSetUser(user, true);
     }

@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import React, { useEffect, useReducer, useState } from "react";
-import  { collection, addDoc, onSnapshot, query, orderBy } from "firebase/firestore";
+import  { collection, addDoc, onSnapshot, query, orderBy, doc, getDoc } from "firebase/firestore";
 import { currentUser, db } from "../config/firestore";
 import { useNavigate } from "react-router-dom";
 import reducer from "../components/reducer";
@@ -47,7 +47,7 @@ export const LechContextWrapper = (props) => {
         
     // }
 
-    
+    const [producst, setProducts] = useState()
     const menuStateHandler = (value) => {
         return setMenuState(value)
     }
@@ -57,7 +57,20 @@ export const LechContextWrapper = (props) => {
     })
   
     useEffect(()=>{
-        
+        const productsCollection = query(collection(db, 'Products'));
+        onSnapshot(productsCollection, (snapshot) => {
+           
+            setProducts(snapshot.docs.map(product => {
+
+                return {
+                    id:product.id,
+                    ...product.data()
+                }
+  
+              }))
+           
+        })
+
         getAuth().onAuthStateChanged(function(user) {
             if (!user) {
                 console.log(user)
@@ -76,6 +89,7 @@ export const LechContextWrapper = (props) => {
             });
     },[])
     const userHandler = (user,state) => {
+        console.log(user?.displayName)
         dispatch({
             type:'UPDATE',
             name:user?.displayName,
@@ -89,7 +103,8 @@ export const LechContextWrapper = (props) => {
             menuState:menuState,
             onMenuState:menuStateHandler,
             onSetUser:userHandler,
-            user:user
+            user:user,
+            producst:producst
            
             }}>
 

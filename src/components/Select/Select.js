@@ -6,14 +6,18 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./select.scss";
-const Select = ({ placeholder, list }) => {
+const Select = ({ placeholder, list, onGetSelected }) => {
   const [placeHolder, setPlaceHolder] = useState(placeholder);
 
   const onSelected = (e) => {
     setPlaceHolder(e.target.innerText);
   };
+
+  useEffect(() => {
+    onGetSelected(placeHolder)
+  },[placeHolder])
 
   return (
     <Box className={"select"} margin="1rem 1rem 1rem 0">
@@ -26,7 +30,7 @@ const Select = ({ placeholder, list }) => {
         >
           {placeHolder}
         </MenuButton>
-        <MenuList>
+        <MenuList w='1rem'>
           {list?.map((item) => (
             <MenuItem color="#C31433" fontSize="20px" onClick={onSelected}>
               {item}
