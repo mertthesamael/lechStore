@@ -14,6 +14,7 @@ import Login from "./pages/Login/Login";
 import { useContext, useEffect, useState } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "./config/firestore";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const App = () => {
 //   const [producst, setProducts] = useState()
@@ -36,7 +37,10 @@ const App = () => {
 //   setProductIds(producst?.map(product => product.id))
 //  },[])
 //  console.log(productIds)
+const queryClient = new QueryClient()
   return (
+    <QueryClientProvider client={queryClient}>
+
     <LechContextWrapper>
       <Wrapper>
         <Menu />
@@ -55,6 +59,7 @@ const App = () => {
         </Body>
       </Wrapper>
     </LechContextWrapper>
+    </QueryClientProvider>
   );
 };
 
