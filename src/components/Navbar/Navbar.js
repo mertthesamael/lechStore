@@ -1,21 +1,31 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { useContext, useEffect } from "react";
+import {
+  Box,
+  Button,
+  Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { currentUser, logOut } from "../../config/firestore";
 import { LechContext } from "../../store/context";
 import styles from "./navbar.module.scss";
 
 const Navbar = () => {
-  const {onMenuState, user, menuState, onSetUser} = useContext(LechContext);
-  const navigate = useNavigate();
+  const { onMenuState, user, menuState, onSetUser } = useContext(LechContext);
+
   const menuHandler = () => {
     return onMenuState(!menuState);
   };
 
   const handleLogout = async () => {
     await logOut();
-    onSetUser(currentUser,false);
+    onSetUser(currentUser, false);
   };
+
   //useEffect hook for closing menu on blur
   useEffect(() => {
     const startEvent = (e) => {
@@ -40,38 +50,49 @@ const Navbar = () => {
       <NavLink to="/" className={styles.navbar__logo}>
         <img alt="lechlogo" src={require("../../assets/Save the Arts 1.png")} />
       </NavLink>
-      <div className={styles.navbar__connect}>
-        {/* <div onClick={connect} className={styles.navbar__connect__button}>
+      {/* <div onClick={connect} className={styles.navbar__connect__button}>
             <div className={styles.navbar__connect__button__icon}>
-              <img src={require("../../assets/metamask.png")}/>
+            <img src={require("../../assets/metamask.png")}/>
             </div>
             <div className={styles.navbar__connect__button__text}>
             <h1>{ctx.connected? ctx.userAddr :'Connect'}</h1>
             </div>
-        </div> */}
-
+          </div> */}
+      <div className={styles.navbar__connect}>
         {user.loggedIn ? (
-          <Menu>
-            <MenuButton
-              as={Button}
-              _hover={{
-                color: "#C31433",
-                backgroundColor: "RGBA(0, 0, 0, 0.16)",
-              }}
-              bgColor="#C31433"
-              color="white"
-              p="1rem 3rem"
-            >
-              {user?.name}
-              
-            </MenuButton>
-            <MenuList>
-              <MenuItem bgColor="white">Profile</MenuItem>
-              <MenuItem onClick={handleLogout} bgColor="white">
-                Sign Out
-              </MenuItem>
-            </MenuList>
-          </Menu>
+          <Box display="flex" position="relative" alignItems="center">
+            <NavLink to='/checkout'>
+
+            <Image
+              marginRight="1rem"
+              height="28px"
+              src={require("../../assets/basket.png")}
+              ></Image>
+              </NavLink>
+            <span className={styles.navbar__user__basket}>
+              {user?.basket?.length}
+            </span>
+            <Menu>
+              <MenuButton
+                as={Button}
+                _hover={{
+                  color: "#C31433",
+                  backgroundColor: "RGBA(0, 0, 0, 0.16)",
+                }}
+                bgColor="#C31433"
+                color="white"
+                p="1rem 3rem"
+              >
+                {user?.name}
+              </MenuButton>
+              <MenuList>
+                <MenuItem bgColor="white">Profile</MenuItem>
+                <MenuItem onClick={handleLogout} bgColor="white">
+                  Sign Out
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Box>
         ) : (
           <NavLink to="/login">
             <Button

@@ -8,6 +8,14 @@
     justify-content: center;
     position: relative;
     padding: 0 2rem;
+    &__user__basket{
+      position: absolute;
+      width: max-content;
+      left:1.47rem;
+      color: $lech-primary;
+      pointer-events: none;
+      
+    }
     &__connect{
       width: 100%;
       display: flex;

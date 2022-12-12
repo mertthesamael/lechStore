@@ -1,10 +1,11 @@
 import { ethers } from "ethers";
 import React, { useEffect, useReducer, useState } from "react";
-import  { collection, addDoc, onSnapshot, query, orderBy, doc, getDoc } from "firebase/firestore";
+import  { collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
 import { currentUser, db } from "../config/firestore";
 import { useNavigate } from "react-router-dom";
 import reducer from "../components/reducer";
 import { getAuth } from "firebase/auth";
+import { useGetData } from "../hooks/useGetData";
 
 
 const LechContext = React.createContext({
@@ -55,25 +56,11 @@ export const LechContextWrapper = (props) => {
     const [user, dispatch] = useReducer(reducer,{
         loggedIn:false
     })
-  
+  const {data:userData} = useGetData("/api/get/Users/"+user?.uid)
     useEffect(()=>{
-        const productsCollection = query(collection(db, 'Products'));
-        onSnapshot(productsCollection, (snapshot) => {
-           
-            setProducts(snapshot.docs.map(product => {
-
-                return {
-                    id:product.id,
-                    ...product.data()
-                }
-  
-              }))
-           
-        })
 
         getAuth().onAuthStateChanged(function(user) {
             if (!user) {
-                console.log(user)
               dispatch({
                type:'UPDATE',
                 loggedIn:false
@@ -83,20 +70,40 @@ export const LechContextWrapper = (props) => {
                 dispatch({
                     type:'UPDATE',
                     name:user?.displayName,
+                    uid:user?.uid,
+                    basket:userData?.data.basket,
                     loggedIn:true
                 })
             }
             });
-    },[])
+        console.log(userData?.data)
+    
+    },[userData])
+
     const userHandler = (user,state) => {
         console.log(user?.displayName)
         dispatch({
             type:'UPDATE',
             name:user?.displayName,
+            uid:user?.uid,
             loggedIn:state
         })
     }
-
+    const userUpdate = async (userId,productId) => {
+        const docRef = await doc(db, 'Users', userId)
+        await updateDoc(docRef,{
+            
+            basket:arrayUnion(productId)
+        })
+        dispatch({
+            type:'UPDATE',
+            name:user?.displayName,
+            uid:user?.uid,
+            loggedIn:true,
+            basket:0,
+        })
+        console.log(user)
+    }
     return(
         <LechContext.Provider value={{
           
@@ -104,7 +111,8 @@ export const LechContextWrapper = (props) => {
             onMenuState:menuStateHandler,
             onSetUser:userHandler,
             user:user,
-            producst:producst
+            producst:producst,
+            basketHandler:userUpdate
            
             }}>
 

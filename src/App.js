@@ -11,32 +11,11 @@ import Item from "./pages/Item/Item";
 import Menu from "./layout/Menu/Menu";
 import { LechContext, LechContextWrapper } from "./store/context";
 import Login from "./pages/Login/Login";
-import { useContext, useEffect, useState } from "react";
-import { collection, onSnapshot, query } from "firebase/firestore";
-import { db } from "./config/firestore";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Checkout from "./pages/Checkout/Checkout";
 
 const App = () => {
-//   const [producst, setProducts] = useState()
-//   const [productIds, setProductIds] = useState()
-//  useEffect(() => {
-//   const productsCollection = query(collection(db, 'Products'));
-        
-//   onSnapshot(productsCollection, (snapshot) => {
-     
-//       setProducts(snapshot.docs.map(product => {
 
-//           return {
-//               id:product.id,
-//               ...product.data()
-//           }
-
-//         }))
-     
-//   })
-//   setProductIds(producst?.map(product => product.id))
-//  },[])
-//  console.log(productIds)
 const queryClient = new QueryClient()
   return (
     <QueryClientProvider client={queryClient}>
@@ -50,6 +29,7 @@ const queryClient = new QueryClient()
           
             <Route path='/products'element={<Products />} />
             <Route path="/" element={<Home />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/about" element={<About />} />
             <Route path='/:id'element={<Item />} />
             <Route path="/profile" element={<Profile />} />

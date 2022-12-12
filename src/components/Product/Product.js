@@ -1,6 +1,7 @@
 import { Image, Text, Button } from "@chakra-ui/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useGetData } from "../../hooks/useGetData";
+import { LechContext } from "../../store/context";
 import Select from "../Select/Select";
 import styles from "./item.module.scss";
 
@@ -9,10 +10,14 @@ const Product = ({itemId}) => {
   
   
   const [selectedColor, setSelectedColor] = useState()
+  
+  const { data } = useGetData(`/api/get/Products/${itemId}`)
+  const {basketHandler, user} = useContext(LechContext)
 
-
-const { data } = useGetData(`/api/get/${itemId}`)
-
+  const addBasket = () => {
+    console.log(itemId, user.uid)
+    basketHandler(user.uid, itemId)
+  }
 
 const getSelected = (e) => {
   if(['XS','S','M','L','XL','XXL'].includes(e)===false)
@@ -45,6 +50,7 @@ const getSelected = (e) => {
              {data?.data.price + " TRY"}
             </Text>
             <Button
+              onClick={addBasket}
               _hover={{
                 color: "#C31433",
                 backgroundColor: "RGBA(0, 0, 0, 0.16)",
