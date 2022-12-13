@@ -1,6 +1,6 @@
 import { Box, Button, Checkbox, Flex, Image, Text } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import BasketItem from "../../components/BasketItem/BasketItem";
 import { LechContext } from "../../store/context";
 import styles from "./checkout.module.scss";
@@ -19,7 +19,7 @@ const Checkout = () => {
     }
     console.log("test");
   }, [user]);
-
+console.log(user.basket)
   return (
     <div className={styles.checkout}>
       <div className={styles.checkout__wrapper}>
@@ -31,10 +31,11 @@ const Checkout = () => {
           gap="5rem"
           h="100%"
           w="75%"
+          textAlign={user?.basket?.length>0?'':"center"}
         >
-          {user?.basket?.map((item) => (
+          {user?.basket?.length>0?user?.basket?.map((item) => (
             <BasketItem item={item} />
-          ))}
+          )):<Text color='white' fontSize='1.5rem'>You have nothing in your basket. So <NavLink style={{textDecoration:'underline'}} to='/products'>go shopping</NavLink>, i guess?</Text>}
         </Box>
         <Box borderLeft="3px solid white" display='flex' flexDir='column'  h='100%' w="25%">
         <Box h='100%'>
@@ -49,6 +50,7 @@ const Checkout = () => {
          </Flex>
         </Box>
         <Box borderTop='2px solid white' h='100%' display='flex' flexDir='column' m='2rem'justifyContent='space-evenly'>
+          <Text fontSize='1.5rem' color='white'>{user.total+" TRY"}</Text>
             <Button h='4rem'>Pay</Button>
             <Button h='4rem'><Image marginRight='1rem' h='20px'src={require("../../assets/metamask.png")}/>Pay With Crypto</Button>
         </Box>

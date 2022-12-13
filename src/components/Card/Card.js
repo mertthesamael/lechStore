@@ -10,7 +10,8 @@ import {
   } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-  
+import Tilt from "react-parallax-tilt"
+import styles from "./card.module.scss"
   const IMAGE =
     'https://cdn.dsmcdn.com/mnresize/-/-//ty572/product/media/images/20221018/22/196846967/600147139/1/1_org_thumb.jpg';
   
@@ -30,7 +31,7 @@ import { NavLink } from 'react-router-dom';
     
 
     return (
-        <NavLink to={'/'+id.replace(/\s+/g, '')}>
+        <NavLink className={styles.card} to={'/'+id.replace(/\s+/g, '')}>
 
       <Center py={12}>
         <Box
@@ -43,29 +44,33 @@ import { NavLink } from 'react-router-dom';
           rounded={'lg'}
           pos={'relative'}
           zIndex={1}>
+              <Tilt tiltMaxAngleX={5} tiltMaxAngleY={10}>
+
           <Box
             rounded={'lg'}
             mt={-12}
             pos={'relative'}
             height={'230px'}
             _after={{
-                transition: 'all .3s ease',
-                content: '""',
-                w: 'full',
-                h: 'full',
-                pos: 'absolute',
-                top: 5,
-                left: 0,
-                backgroundImage: `url(${images[0].img})`,
-                filter: 'blur(15px)',
-                zIndex: -1,
+              transition: 'all .3s ease',
+              content: '""',
+              w: 'full',
+              h: 'full',
+              pos: 'absolute',
+              top: 5,
+              left: 0,
+              backgroundImage: `url(${images[0].img})`,
+              filter: 'blur(15px)',
+              zIndex: -1,
             }}
             _groupHover={{
-                _after: {
-                    filter: 'blur(20px)',
-                },
+              _after: {
+                filter: 'blur(20px)',
+              },
             }}>
+
             <Image
+              className={styles.card__img}
               rounded={'lg'}
               height={230}
               width={282}
@@ -73,6 +78,7 @@ import { NavLink } from 'react-router-dom';
               src={images[0].img}
               />
           </Box>
+              </Tilt>
           <Stack pt={10} align={'center'}>
             <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
               Lech

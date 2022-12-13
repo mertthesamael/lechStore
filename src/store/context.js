@@ -73,11 +73,12 @@ export const LechContextWrapper = (props) => {
                     name:user?.displayName,
                     uid:user?.uid,
                     basket:userData?.data.basket,
-                    loggedIn:true
+                    loggedIn:true,
+                    total:userData?.data.total
                 })
             }
             });
-        console.log(userData?.data)
+       console.log(user.data)
     
     },[userData])
 
@@ -96,7 +97,8 @@ export const LechContextWrapper = (props) => {
         
         updateDoc(docRef,{
             
-            basket:arrayRemove(item)
+            basket:arrayRemove(item),
+            total:user.total-=item.price
         }).then(() => {
 
             dispatch({
@@ -105,6 +107,7 @@ export const LechContextWrapper = (props) => {
                 uid:user?.uid,
                 loggedIn:true,
                 basket:userData?.data.basket,
+                total:user.total-=item.price
             })
             
         }).then(()=> refetch())
@@ -114,7 +117,8 @@ export const LechContextWrapper = (props) => {
     
         updateDoc(docRef,{
             
-            basket:arrayUnion({id:productId,size:size,color:color,price:price})
+            basket:arrayUnion({id:productId,size:size,color:color,price:price}),
+            total:user.total+=price
         }).then(() => {
             dispatch({
                 type:'UPDATE',
@@ -122,6 +126,7 @@ export const LechContextWrapper = (props) => {
                 uid:user?.uid,
                 loggedIn:true,
                 basket:userData?.data.basket,
+                total:user.total+=price
             })
             
         }).then(()=> refetch())

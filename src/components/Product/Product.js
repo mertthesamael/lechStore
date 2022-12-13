@@ -13,10 +13,10 @@ const Product = ({itemId}) => {
   
   const { data } = useGetData(`/api/get/Products/${itemId}`)
   const {basketHandler, user} = useContext(LechContext)
-
+console.log(selectedSize)
   const toast = useToast()
   const addBasket = () => {
-    if(selectedColor!=='Color'&&selectedSize.includes("Select")===false){
+    if(selectedColor!=='Color'&&selectedSize!==undefined){
 
       basketHandler(user.uid, itemId,selectedSize,selectedColor,data?.data.price)
       toast({

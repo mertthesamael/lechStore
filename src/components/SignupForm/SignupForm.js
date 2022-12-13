@@ -30,7 +30,8 @@ const SignupForm = () => {
       await setDoc(doc(db,'Users', user.uid),{
         uid:user.uid,
         name:user.displayName,
-        email:user.email
+        email:user.email,
+        total:0
       })
       toast({
         title: 'Account created.',
