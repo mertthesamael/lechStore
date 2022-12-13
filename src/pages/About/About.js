@@ -13,7 +13,11 @@ const About = () => {
                 <Text fontSize='50px' fontWeight='600'>Lech Store</Text>
             </Box>
             <Box textAlign='center'>
-                <Text fontSize='30px'>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate</Text>
+                <Text fontSize='30px'>Lech Store e-commerce is an online shopping platform that offers a wide range of high-quality products at affordable prices. We strive to provide our customers with an easy and convenient shopping experience and are committed to delivering exceptional customer service.
+
+We offer a secure online shopping platform and use industry-standard encryption to protect our customers' personal and payment information. We also offer a 100% satisfaction guarantee on all of our products and free shipping on orders over $50 within the United States.
+
+At Lech Store e-commerce, we are passionate about helping our customers find the products they need and are always looking for new and exciting products to add to our platform. Thank you for choosing Lech Store e-commerce for your online shopping needs. We look forward to serving you.</Text>
             </Box>
             <Box display='flex' justifyContent='space-evenly' w='100%'>
             <a href="https://www.instagram.com/enercanmert/" target={'_blank'}>

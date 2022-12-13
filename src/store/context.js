@@ -1,11 +1,12 @@
 import { ethers } from "ethers";
 import React, { useEffect, useReducer, useState } from "react";
-import  { collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, updateDoc, arrayUnion } from "firebase/firestore";
+import  { collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { currentUser, db } from "../config/firestore";
 import { useNavigate } from "react-router-dom";
 import reducer from "../components/reducer";
 import { getAuth } from "firebase/auth";
 import { useGetData } from "../hooks/useGetData";
+import { id } from "ethers/lib/utils";
 
 
 const LechContext = React.createContext({
@@ -56,7 +57,7 @@ export const LechContextWrapper = (props) => {
     const [user, dispatch] = useReducer(reducer,{
         loggedIn:false
     })
-  const {data:userData} = useGetData("/api/get/Users/"+user?.uid)
+  const {data:userData, refetch} = useGetData("/api/get/Users/"+user?.uid)
     useEffect(()=>{
 
         getAuth().onAuthStateChanged(function(user) {
@@ -81,7 +82,7 @@ export const LechContextWrapper = (props) => {
     },[userData])
 
     const userHandler = (user,state) => {
-        console.log(user?.displayName)
+ 
         dispatch({
             type:'UPDATE',
             name:user?.displayName,
@@ -89,20 +90,43 @@ export const LechContextWrapper = (props) => {
             loggedIn:state
         })
     }
-    const userUpdate = async (userId,productId) => {
+    const deleteItem = async(userId,item) => {
+
         const docRef = await doc(db, 'Users', userId)
-        await updateDoc(docRef,{
+        
+        updateDoc(docRef,{
             
-            basket:arrayUnion(productId)
-        })
-        dispatch({
-            type:'UPDATE',
-            name:user?.displayName,
-            uid:user?.uid,
-            loggedIn:true,
-            basket:0,
-        })
-        console.log(user)
+            basket:arrayRemove(item)
+        }).then(() => {
+
+            dispatch({
+                type:'UPDATE',
+                name:user?.name,
+                uid:user?.uid,
+                loggedIn:true,
+                basket:userData?.data.basket,
+            })
+            
+        }).then(()=> refetch())
+    }
+    const userUpdate = async (userId,productId,size,color,price) => {
+        const docRef = await doc(db, 'Users', userId)
+    
+        updateDoc(docRef,{
+            
+            basket:arrayUnion({id:productId,size:size,color:color,price:price})
+        }).then(() => {
+            dispatch({
+                type:'UPDATE',
+                name:user?.name,
+                uid:user?.uid,
+                loggedIn:true,
+                basket:userData?.data.basket,
+            })
+            
+        }).then(()=> refetch())
+      
+        console.log(userData, user)
     }
     return(
         <LechContext.Provider value={{
@@ -112,7 +136,8 @@ export const LechContextWrapper = (props) => {
             onSetUser:userHandler,
             user:user,
             producst:producst,
-            basketHandler:userUpdate
+            basketHandler:userUpdate,
+            deleteItem:deleteItem
            
             }}>
 

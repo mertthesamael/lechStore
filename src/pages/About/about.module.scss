@@ -7,15 +7,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: auto;
     &__wrapper{
         display: flex;
         align-items: center;
         flex-direction: column;
         color: white;
-        justify-content: center;
         justify-content: space-between;
-        height: 50%;
+        height:40rem;
         width: 50%;
+        overflow: auto;
     }
 }

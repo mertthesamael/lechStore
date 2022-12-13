@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import "./select.scss";
-const Select = ({ placeholder, list, onGetSelected, disable }) => {
+const Select = ({ placeholder, list, onGetSelected, disable}) => {
   const [placeHolder, setPlaceHolder] = useState(placeholder);
 
   const onSelected = (e) => {
@@ -18,7 +18,7 @@ const Select = ({ placeholder, list, onGetSelected, disable }) => {
   useEffect(() => {
     onGetSelected(placeHolder)
   },[placeHolder])
-  
+
   return (
     <Box className={"select"} margin="1rem 1rem 1rem 0">
       <Menu>
@@ -32,8 +32,8 @@ const Select = ({ placeholder, list, onGetSelected, disable }) => {
         </MenuButton>
         <MenuList w='1rem'>
           {list?.map((item) => (
-            <MenuItem isDisabled={disable} color="#C31433" fontSize="20px" onClick={onSelected}>
-              {item}
+            <MenuItem isDisabled={!item.stock} color="#C31433" fontSize="20px" onClick={onSelected}>
+              {item.name?item.name:item.size}
             </MenuItem>
           ))}
         </MenuList>
