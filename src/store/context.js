@@ -74,11 +74,12 @@ export const LechContextWrapper = (props) => {
                     uid:user?.uid,
                     basket:userData?.data.basket,
                     loggedIn:true,
-                    total:userData?.data.total
+                    total:userData?.data.total,
+                    address:userData?.data.address
                 })
             }
             });
-       console.log(user.data)
+       console.log(user.address)
     
     },[userData])
 

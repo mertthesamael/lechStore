@@ -13,7 +13,10 @@ import { LechContext, LechContextWrapper } from "./store/context";
 import Login from "./pages/Login/Login";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Checkout from "./pages/Checkout/Checkout";
-
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 const App = () => {
 
 const queryClient = new QueryClient()
