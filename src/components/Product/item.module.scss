@@ -68,3 +68,25 @@
         
     }
 }
+
+@media screen and (max-width: 640px) {
+    .product{
+        
+        width: 90%;
+        height: 95%;
+        zoom: 0.9;
+        grid-template-columns: repeat(1,1fr);
+
+        &__left{
+            padding: 1rem;
+            & img{
+                height: 250px;
+            }
+        }
+        &__right{
+            align-items: center;
+            padding: 0;
+        }
+        
+    }
+}
