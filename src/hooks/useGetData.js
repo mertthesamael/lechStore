@@ -5,7 +5,7 @@ export const useGetData = (endpoint) => {
     
   const fetchData = (endpoint) => {
     return axios(
-      `${process.env.REACT_APP_API+'/'+endpoint}`
+      `${process.env.REACT_APP_API+endpoint}`
     );
   };
 

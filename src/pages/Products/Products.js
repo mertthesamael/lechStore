@@ -5,7 +5,7 @@ import { Text } from "@chakra-ui/react";
 
 const Products = () => {
 
-    const {data, isLoading} = useGetData ("api/getAll/products")
+    const {data, isLoading} = useGetData ("/api/getAll/products")
    
     if(isLoading){
         return(
