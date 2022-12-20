@@ -1,4 +1,4 @@
-import { Box, Button, Checkbox, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Checkbox, Flex, Grid, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, Textarea, useDisclosure } from "@chakra-ui/react";
 import { useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,21 +11,37 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-const Checkout = () => {
-  const { user } = useContext(LechContext);
-  console.log(user)
-  const navigate = useNavigate();
-  let total=0;
 
+const Checkout = () => {
+  const { user,addressHandler } = useContext(LechContext);
+  const navigate = useNavigate();
+   const {isOpen, onOpen, onClose} = useDisclosure()
   
 
   useEffect(() => {
     if (user.loggedIn == false) {
       return navigate("/login");
     }
-    console.log("test");
+    
+    if(user.address[3]==undefined){
+      onOpen()
+    }
+    else{
+      onClose()
+    }
   }, [user]);
-console.log(user.basket)
+
+  const formHandler = (e) => {
+    // address, apartment, city,  district, name, no, zipcode
+    
+    e.preventDefault()
+    console.log(e.target.address.value)
+    console.log(user.uid)
+
+    addressHandler(user.uid, e.target.address.value, e.target.apartment.value, e.target.city.value, e.target.district.value, e.target.name.value, e.target.no.value, e.target.zipcode.value)
+    
+  }
+
   return (
     <div className={styles.checkout}>
       <div className={styles.checkout__wrapper}>
@@ -61,7 +77,36 @@ console.log(user.basket)
           navigation
         
         >
-          {/* name,city,number,code,apart,address,disctrit */}
+          <Modal isOpen={isOpen} onClose={onClose} >
+          <ModalOverlay />
+          <ModalContent>
+          <ModalHeader>Register an Address</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            
+
+           <form onSubmit={formHandler}>
+            <Flex flexDir={'column'} gap='2rem'>
+            <Input name='name' placeholder="Address Name"></Input>
+            <Textarea name='address' resize='none'></Textarea>
+            <Input name='city' placeHolder='City'></Input>
+            <Input name='district' placeHolder='District'></Input>
+            <Flex>
+            <Input name='no' placeholder='No'></Input>
+            <Input name='apartment' placeholder='Apartment'></Input>
+            </Flex>
+            <Input name='zipcode' placeholder='Zipcode'></Input>
+            <Flex m='1.5rem 0' justifyContent='flex-end'>
+
+            <Button onClick={onClose} variant='ghost'>Close</Button>
+            <Input w='' value='Register' type='submit' bgColor='#C31433' color='white' _hover={{backgroundColor:'#737373', color:'#C31433'}} mr={3}  >
+            </Input>
+            </Flex>
+      </Flex>
+           </form>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
           {user?.address?.map(addr => 
           <SwiperSlide>
           <Address name={addr.name} city={addr.city} apart={addr.apartment} address={addr.address} number={addr.no} code={addr.zipcode} district={addr.district}></Address>

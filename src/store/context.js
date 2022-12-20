@@ -134,6 +134,28 @@ export const LechContextWrapper = (props) => {
       
         console.log(userData, user)
     }
+    const userUpdateAddress = async (userId,address, apartment, city,  district, name, no, zipcode) => {
+        const docRef = await doc(db, 'Users', userId)
+    
+        updateDoc(docRef,{
+            
+            address:arrayUnion({address:address, apartment:apartment, city:city, district:district, name:name, no:no, zipcode:zipcode}),
+           
+        }).then(() => {
+            dispatch({
+                type:'UPDATE',
+                name:user?.name,
+                uid:user?.uid,
+                loggedIn:true,
+                basket:userData?.data.basket,
+                address:userData.data.address
+                
+            })
+            
+        }).then(()=> refetch())
+      
+        console.log(userData, user)
+    }
     return(
         <LechContext.Provider value={{
           
@@ -143,7 +165,8 @@ export const LechContextWrapper = (props) => {
             user:user,
             producst:producst,
             basketHandler:userUpdate,
-            deleteItem:deleteItem
+            deleteItem:deleteItem,
+            addressHandler:userUpdateAddress
            
             }}>
 
