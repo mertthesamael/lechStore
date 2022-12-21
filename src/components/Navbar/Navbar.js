@@ -86,7 +86,7 @@ const Navbar = () => {
                 {user?.name}
               </MenuButton>
               <MenuList>
-                <MenuItem bgColor="white">Profile</MenuItem>
+                <MenuItem bgColor="white"><NavLink to='/profile'>Profile</NavLink></MenuItem>
                 <MenuItem onClick={handleLogout} bgColor="white">
                   Sign Out
                 </MenuItem>

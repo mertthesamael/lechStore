@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import React, { useEffect, useReducer, useState } from "react";
 import  { collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { currentUser, db } from "../config/firestore";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import reducer from "../components/reducer";
 import { getAuth } from "firebase/auth";
 import { useGetData } from "../hooks/useGetData";
@@ -19,6 +19,7 @@ export const LechContextWrapper = (props) => {
 // WEB3 Codes
     // const navigate = useNavigate()
     const [menuState, setMenuState] = useState(false)
+    const [userLoading, setUserLoading] = useState(true)
     // const [connected, setConnected] = useState(false)
     // const [userAddr, setUserAddr] = useState("")
     // const [users, setUsers] = useState()
@@ -50,6 +51,7 @@ export const LechContextWrapper = (props) => {
     // }
 
     const [producst, setProducts] = useState()
+    const navigate = useNavigate()
     const menuStateHandler = (value) => {
         return setMenuState(value)
     }
@@ -58,27 +60,42 @@ export const LechContextWrapper = (props) => {
         loggedIn:false
     })
   const {data:userData, refetch} = useGetData("/api/get/Users/"+user?.uid)
-    useEffect(()=>{
 
-        getAuth().onAuthStateChanged(function(user) {
-            if (!user) {
-              dispatch({
-               type:'UPDATE',
-                loggedIn:false
+  const checkLogin = () => {
+    const result = getAuth().onAuthStateChanged(function(user) {
+        if (!user) {
+            setUserLoading(false)
+          dispatch({
+           type:'UPDATE',
+           loggedIn:false
+        })
+        
+        }
+        else{
+            setUserLoading(false)
+            console.log(userData)
+            dispatch({
+                type:'UPDATE',
+                name:userData?.data.name,
+                uid:user?.uid,
+                basket:userData?.data.basket,
+                loggedIn:true,
+                total:userData?.data.total,
+                address:userData?.data.address
             })
-            }
-            else{
-                dispatch({
-                    type:'UPDATE',
-                    name:user?.displayName,
-                    uid:user?.uid,
-                    basket:userData?.data.basket,
-                    loggedIn:true,
-                    total:userData?.data.total,
-                    address:userData?.data.address
-                })
-            }
-            });
+        }
+        
+        })
+
+        return result()
+  }
+    useEffect(()=>{
+        setUserLoading(true)
+        checkLogin()
+      
+       if(userLoading === false && user.loggedIn == false){
+        navigate("/login")
+       }
        console.log(user.address)
     
     },[userData])
@@ -111,6 +128,25 @@ export const LechContextWrapper = (props) => {
                 total:user.total-=item.price
             })
             
+        }).then(()=> refetch())
+    }
+    const userNameUpdate = async (userId,name) => {
+        const docRef = await doc(db, 'Users', userId)
+
+        updateDoc(docRef,{
+            name:name
+        }).then(()=> {
+            dispatch({
+                type:'UPDATE',
+                loggedIn:true,
+                name:name,
+                basket:user.basket,
+                uid:user.uid,
+                total:user.total,
+                address:user.address
+
+
+            })
         }).then(()=> refetch())
     }
     const userUpdate = async (userId,productId,size,color,price) => {
@@ -166,7 +202,9 @@ export const LechContextWrapper = (props) => {
             producst:producst,
             basketHandler:userUpdate,
             deleteItem:deleteItem,
-            addressHandler:userUpdateAddress
+            addressHandler:userUpdateAddress,
+            userLoading: userLoading,
+            userNameUpdate:userNameUpdate
            
             }}>
 

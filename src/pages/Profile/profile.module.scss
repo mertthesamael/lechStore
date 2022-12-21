@@ -1,0 +1,13 @@
+@use "../../style/global.scss" as *;
+
+
+.profile{
+    min-height: 100%;
+    height: max-content;
+    background-color: $lech-primary;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    
+}

@@ -13,22 +13,20 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 const Checkout = () => {
-  const { user,addressHandler } = useContext(LechContext);
+  const { user,addressHandler,checkLogin } = useContext(LechContext);
   const navigate = useNavigate();
    const {isOpen, onOpen, onClose} = useDisclosure()
   
 
   useEffect(() => {
-    if (user.loggedIn == false) {
-      return navigate("/login");
-    }
     
-    if(user.address[3]==undefined){
+    
+    /*if(user?.address[3]==undefined){
       onOpen()
     }
     else{
       onClose()
-    }
+    }*/
   }, [user]);
 
   const formHandler = (e) => {

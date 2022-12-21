@@ -1,5 +1,7 @@
 @use "../../style/global.scss" as *;
-
+html{
+    background-color: $lech-primary;
+}
 .home{
     height: 100%;
     background-color: $lech-primary;
