@@ -97,4 +97,25 @@
           height: 90px;
         }
     }
+    & .loginIcon{
+      display: none;
+    }
+}
+
+@media screen and (max-width: 720px){
+  .navbar {
+    & .loginIcon{
+    display: flex;
+  }
+  & .userName{
+    display: none;
+  }
+  & .loginBtn{
+    background-color: white;
+    display:grid;
+    place-items: center;
+    border: 2px solid $lech-primary;
+    padding: 0;
+  }
+}
 }

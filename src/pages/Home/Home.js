@@ -6,10 +6,11 @@ import Card from "../../components/Card/Card";
 import Spline from "@splinetool/react-spline";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../config/firestore";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
-
+    const navigate = useNavigate()
     const [fade, setFade] = useState(false)
     const [products, setProducts] = useState()
     useEffect(() => {
@@ -40,7 +41,8 @@ console.log(products)
                 </Fade>
 
                 <div className={styles.home__welcomer__logo}>
-                    <img src={require("../../assets/0a76842e-7377-4517-af56-68aac2b41682.png")}/>
+                    <Button onClick={() => navigate('/products')} color='white' size='lg' p='2rem' border='1px solid white' bgColor='transparent' _hover={{color:'red', backgroundColor:'white'}}>See Products</Button>
+                    <Button onClick={() => navigate('/signup')} fontSize='20px' size='lg' p='2rem' color='red' _hover={{backgroundColor:'transparent', color:'white', border:'1px solid white'}}>Sign Up Now!</Button>
                 </div>
             </div>
             <div className={styles.home__cta}>

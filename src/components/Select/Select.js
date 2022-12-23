@@ -20,12 +20,12 @@ const Select = ({ placeholder, list, onGetSelected, disable}) => {
   },[placeHolder])
 
   return (
-    <Box className={"select"} margin="1rem 1rem 1rem 0">
+    <Box  className={"select"} margin="1rem 1rem 1rem 0">
       <Menu>
         <MenuButton
           fontSize="20px"
-          borderColor="#737373"
           color="#C31433"
+          border='2px solid #C31433'
           as={Button}
         >
           {placeHolder}

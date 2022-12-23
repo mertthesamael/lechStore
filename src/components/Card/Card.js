@@ -18,7 +18,7 @@ import styles from "./card.module.scss"
   export default function Card({img, item}) {
   
     
-    const {id, category, colors, description, discount, images, name, price:solidPrice, size, supply} = item
+    const {id, category, colors, description, discount, images, name, price:solidPrice, size, supply, itemOfWeek} = item
 
     const [price, setPrice] = useState(solidPrice)
 
@@ -83,6 +83,9 @@ import styles from "./card.module.scss"
             <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
               Lech
             </Text>
+           {itemOfWeek&&<Box h='3rem' w='100%' display='grid' placeItems='center' bgColor='#C31433'>
+              <Text color='white' fontSize='20px'>ITEM OF THE WEEK !</Text>
+            </Box>}
             <Heading fontSize={'2xl'} fontFamily={'body'} color='black' fontWeight={500}>
               {name}
             </Heading>

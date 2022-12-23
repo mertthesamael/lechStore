@@ -13,6 +13,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { currentUser, logOut } from "../../config/firestore";
 import { LechContext } from "../../store/context";
 import styles from "./navbar.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const { onMenuState, user, menuState, onSetUser } = useContext(LechContext);
@@ -50,14 +52,6 @@ const Navbar = () => {
       <NavLink to="/" className={styles.navbar__logo}>
         <img alt="lechlogo" src={require("../../assets/Save the Arts 1.png")} />
       </NavLink>
-      {/* <div onClick={connect} className={styles.navbar__connect__button}>
-            <div className={styles.navbar__connect__button__icon}>
-            <img src={require("../../assets/metamask.png")}/>
-            </div>
-            <div className={styles.navbar__connect__button__text}>
-            <h1>{ctx.connected? ctx.userAddr :'Connect'}</h1>
-            </div>
-          </div> */}
       <div className={styles.navbar__connect}>
         {user.loggedIn ? (
           <Box display="flex" position="relative" alignItems="center">
@@ -72,8 +66,10 @@ const Navbar = () => {
             <span className={styles.navbar__user__basket}>
               {user?.basket?.length}
             </span>
+            
             <Menu>
               <MenuButton
+              className={styles.loginBtn}
                 as={Button}
                 _hover={{
                   color: "#C31433",
@@ -83,7 +79,9 @@ const Navbar = () => {
                 color="white"
                 p="1rem 3rem"
               >
-                {user?.name}
+            <FontAwesomeIcon className={styles.loginIcon} color='#C31433' icon={faUser}/>
+
+                <Text className={styles.userName}>{user?.name}</Text>
               </MenuButton>
               <MenuList>
                 <MenuItem bgColor="white"><NavLink to='/profile'>Profile</NavLink></MenuItem>
@@ -95,7 +93,9 @@ const Navbar = () => {
           </Box>
         ) : (
           <NavLink to="/login">
+            <FontAwesomeIcon className={styles.loginIcon} color='#C31433' icon={faUser}/>
             <Button
+              className={styles.loginBtn}
               _hover={{
                 color: "#C31433",
                 backgroundColor: "RGBA(0, 0, 0, 0.16)",

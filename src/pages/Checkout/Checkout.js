@@ -61,11 +61,11 @@ const Checkout = () => {
         <Box color='white' h='100%'>
 
          <Flex p='1rem'>
-            <Checkbox marginRight='1rem'></Checkbox>
+            <Checkbox size='lg' colorScheme='transparent' marginRight='1rem'></Checkbox>
             <Text fontSize='1.5rem'>I've accepted the things that i need to accept</Text>
          </Flex>
          <Flex p='1rem'>
-         <Checkbox marginRight='1rem'></Checkbox>
+         <Checkbox size='lg' colorScheme='transparent' marginRight='1rem'></Checkbox>
             <Text fontSize='1.5rem'>I've accepted the things that i need to accept</Text>
          </Flex>
         </Box>

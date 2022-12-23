@@ -25,7 +25,7 @@ const [editName, setEditName] = useState(false)
         <div className={styles.profile}>
             <Flex p='2rem 0' overflow='auto' gap='2rem' flexDir='column' h='80%' w='80%' bgColor='white' borderRadius='15px'>
             <Box w='100%' h='max-content' textAlign='center'>
-                <Text fontSize='50px'>Mert Enercan</Text>
+                <Text color='#C31433' fontWeight='bolder' fontSize='50px'>{user?.name}</Text>
             </Box>
             <Box display='flex' flexWrap='wrap' h='100%' w='100%' justifyContent='space-around'>
                 <Flex m='0 0 2rem 0' p='0 2rem' justifyContent='center'  gap='2rem' flexDir='column' w='25rem' h='100%' bgColor='#C31433'>

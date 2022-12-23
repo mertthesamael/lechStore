@@ -18,12 +18,12 @@ html{
         font-size: 80px;
         color: white;
         padding: 10rem 5rem;
-        justify-content: space-between;
+        justify-content: space-around;
         flex-direction: column;
         &__logo{
-            & img{
-                height: 200px;
-            }
+            display: flex;
+            gap: 4rem;
+            
         }
         & span{
             text-decoration:underline;

@@ -13,7 +13,6 @@ const Product = ({itemId}) => {
   
   const { data } = useGetData(`/api/get/Products/${itemId}`)
   const {basketHandler, user} = useContext(LechContext)
-console.log(selectedSize)
   const toast = useToast()
   const addBasket = () => {
     if(selectedColor!=='Color'&&selectedSize!==undefined){
@@ -54,6 +53,7 @@ const getSelectedColor = (e) => {
 
   return (
     <div className={styles.product}>
+      {data?.data.itemOfWeek&&<div className={styles.product__banner}>Item Of The Week</div>}
       <div className={styles.product__left}>
         <div className={styles.product__left__img}>
           <Image src={selectedColor?.includes('Color')==false? data?.data.images.filter(x=>x.color==selectedColor)[0]?.img:data?.data.images[0].img} />
