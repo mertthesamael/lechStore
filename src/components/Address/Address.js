@@ -9,11 +9,11 @@ const Address = ({ name, city, number, code, apart, address, district }) => {
       h="10rem"
       bgColor="white"
       borderRadius="10px"
-      border="1px solid white"
       p='1rem'
       display='flex'
       flexDir='column'
       textTransform='capitalize'
+      border='2px solid #C31433'
     >
       <Box marginBottom='0.3rem' display='flex'>
         <Text fontWeight='bolder'>{name}</Text>
