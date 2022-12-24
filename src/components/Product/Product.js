@@ -10,12 +10,26 @@ const Product = ({itemId}) => {
   
   const [selectedColor, setSelectedColor] = useState()
   const [selectedSize, setSelectedSize] = useState()
-  
+  const [alreadyIn, setAlreadyIn] = useState(false)
   const { data } = useGetData(`/api/get/Products/${itemId}`)
   const {basketHandler, user} = useContext(LechContext)
   const toast = useToast()
+
+  //Maybe i'll need this fn in the future. Basically it checks if item in the basket already.
+  const checkItems = () => {
+    const item = data?.data
+    user?.basket.map(basket => {
+      if(Object.values(basket).includes(item.id)&&Object.values(basket).includes(selectedSize)){
+        setAlreadyIn(true)
+      }else{
+        console.log("NO")
+        setAlreadyIn(false)
+      }
+    })
+  
+  }
   const addBasket = () => {
-    if(selectedColor!=='Color'&&selectedSize!==undefined){
+    if(alreadyIn===false&&selectedColor!=='Color'&&selectedSize!==undefined){
 
       basketHandler(user.uid, itemId,selectedSize,selectedColor,data?.data.price)
       toast({
@@ -88,6 +102,7 @@ const getSelectedColor = (e) => {
             >
               Add to Cart
             </Button>
+            <Button onClick={checkItems}>Check Item</Button>
           </div>
         </div>
       </div>

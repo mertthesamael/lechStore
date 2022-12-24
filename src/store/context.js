@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import React, { useEffect, useReducer, useState } from "react";
-import  { collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import  { collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore";
 import { currentUser, db } from "../config/firestore";
 import { Navigate, useNavigate } from "react-router-dom";
 import reducer from "../components/reducer";
@@ -99,7 +99,7 @@ export const LechContextWrapper = (props) => {
        console.log(user.address)
     
     },[userData])
-
+console.log(Math.abs(32) * -1)
     const userHandler = (user,state) => {
  
         dispatch({
@@ -116,7 +116,7 @@ export const LechContextWrapper = (props) => {
         updateDoc(docRef,{
             
             basket:arrayRemove(item),
-            total:user.total-=item.price
+            total:increment(Math.abs(item.price) * -1)
         }).then(() => {
 
             dispatch({
@@ -155,7 +155,7 @@ export const LechContextWrapper = (props) => {
         updateDoc(docRef,{
             
             basket:arrayUnion({id:productId,size:size,color:color,price:price}),
-            total:user.total+=price
+            total:increment(price)
         }).then(() => {
             dispatch({
                 type:'UPDATE',

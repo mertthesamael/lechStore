@@ -94,8 +94,8 @@ import styles from "./card.module.scss"
                 {price +" TRY"}
               </Text>
               {discount.state &&
-              <Text fontSize={'2xl'} textDecoration={'line-through'} color={'gray.600'}>
-                {solidPrice+' TRY'}
+              <Text fontSize={'1xl'} textDecoration={'line-through'} color={'gray.600'}>
+                {solidPrice.toFixed(0)+' TRY'}
               </Text>
               }
             </Stack>
