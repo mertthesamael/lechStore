@@ -110,7 +110,7 @@ console.log(Math.abs(32) * -1)
         })
     }
     const deleteItem = async(userId,item) => {
-
+        console.log(item)
         const docRef = await doc(db, 'Users', userId)
         
         updateDoc(docRef,{
@@ -151,10 +151,9 @@ console.log(Math.abs(32) * -1)
     }
     const userUpdate = async (userId,productId,size,color,price) => {
         const docRef = await doc(db, 'Users', userId)
-    
+        const date = Date.now()
         updateDoc(docRef,{
-            
-            basket:arrayUnion({id:productId,size:size,color:color,price:price}),
+            basket:arrayUnion({id:productId,size:size,color:color,price:price ,date:date}),
             total:increment(price)
         }).then(() => {
             dispatch({
@@ -167,8 +166,6 @@ console.log(Math.abs(32) * -1)
             })
             
         }).then(()=> refetch())
-      
-        console.log(userData, user)
     }
     const userUpdateAddress = async (userId,address, apartment, city,  district, name, no, zipcode) => {
         const docRef = await doc(db, 'Users', userId)

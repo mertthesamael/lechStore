@@ -96,11 +96,9 @@ const Checkout = () => {
           h="100%"
           w="25%"
           className={styles.checkout__left}
-          
         >
-
           <Box className={styles.checkboxWrapper} color="white" h="100%">
-            <Flex p="1rem" w='max-content'>
+            <Flex p="1rem" w="max-content">
               <Checkbox
                 size="lg"
                 colorScheme="transparent"
@@ -111,7 +109,7 @@ const Checkout = () => {
               </Text>
             </Flex>
 
-            <Flex p="1rem" w='max-content'>
+            <Flex p="1rem" w="max-content">
               <Checkbox
                 size="lg"
                 colorScheme="transparent"
@@ -121,7 +119,6 @@ const Checkout = () => {
                 I've accepted the things that i need to accept
               </Text>
             </Flex>
-
           </Box>
 
           <Box
@@ -199,7 +196,7 @@ const Checkout = () => {
             display="flex"
             flexDir="column"
             m="2rem"
-            gap={'1rem'}
+            gap={"1rem"}
             justifyContent="space-evenly"
           >
             <Text fontSize="1.5rem" color="white">
