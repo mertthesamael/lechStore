@@ -74,6 +74,7 @@ const Checkout = () => {
           gap="2rem"
           h="100%"
           w="75%"
+          className={styles.checkout__right}
           textAlign={user?.basket?.length > 0 ? "" : "center"}
         >
           {user?.basket?.length > 0 ? (
@@ -97,28 +98,32 @@ const Checkout = () => {
           className={styles.checkout__left}
           
         >
-          <Box color="white" h="100%">
-            <Flex p="1rem">
+
+          <Box className={styles.checkboxWrapper} color="white" h="100%">
+            <Flex p="1rem" w='max-content'>
               <Checkbox
                 size="lg"
                 colorScheme="transparent"
                 marginRight="1rem"
               ></Checkbox>
-              <Text fontSize="1.5rem">
+              <Text className={styles.checkText} fontSize="1.5rem">
                 I've accepted the things that i need to accept
               </Text>
             </Flex>
-            <Flex p="1rem">
+
+            <Flex p="1rem" w='max-content'>
               <Checkbox
                 size="lg"
                 colorScheme="transparent"
                 marginRight="1rem"
               ></Checkbox>
-              <Text fontSize="1.5rem">
+              <Text className={styles.checkText} fontSize="1.5rem">
                 I've accepted the things that i need to accept
               </Text>
             </Flex>
+
           </Box>
+
           <Box
             display="flex"
             alinItems="center"
@@ -194,6 +199,7 @@ const Checkout = () => {
             display="flex"
             flexDir="column"
             m="2rem"
+            gap={'1rem'}
             justifyContent="space-evenly"
           >
             <Text fontSize="1.5rem" color="white">

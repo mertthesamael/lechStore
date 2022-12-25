@@ -11,8 +11,8 @@
     &__wrapper{
         width: 80%;
         border: 2px solid white;
-        height: 90%;
-    padding: 4rem;
+        height: 45rem;
+        padding: 4rem;
     
 
         display: flex;
@@ -26,10 +26,31 @@
 
         &__wrapper{
             flex-direction: column;
+            padding: 0;
+            justify-content: center;
+            align-items: center;
+            font-size: smaller;
         }
-
+        &__right{
+            width: 100%;
+            width: 100%!important;
+            padding: 1rem!important;
+        }
         &__left{
-            flex-direction: row;
+            flex-direction: column;
+            height: max-content;
+            zoom: 0.9;
+            border-top: 2px solid white;
+            border-left: 0px solid white;
+            width: 100%!important;
+
+        }
+        & .checkText{
+            font-size: 15px!important;
+        }
+        & .checkboxWrapper{
+            display: flex;
+            flex-direction: column;
         }
     }
 }
