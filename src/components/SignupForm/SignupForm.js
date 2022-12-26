@@ -72,8 +72,8 @@ const SignupForm = () => {
         }}
         bgColor="#C31433"
         color="white"
-        w="5rem"
         h="3rem"
+        value='Sign Up'
       ></Input>
     </form>
   );

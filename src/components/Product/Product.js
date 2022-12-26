@@ -1,9 +1,10 @@
-import { Image, Text, Button, useToast } from "@chakra-ui/react";
+import { Image, Text, Button, useToast, SkeletonText,Skeleton } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { useGetData } from "../../hooks/useGetData";
 import { LechContext } from "../../store/context";
 import Select from "../Select/Select";
 import styles from "./item.module.scss";
+
 
 const Product = ({itemId}) => {
 
@@ -11,23 +12,11 @@ const Product = ({itemId}) => {
   const [selectedColor, setSelectedColor] = useState()
   const [selectedSize, setSelectedSize] = useState()
   const [alreadyIn, setAlreadyIn] = useState(false)
-  const { data } = useGetData(`/api/get/Products/${itemId}`)
+  const { data, isLoading } = useGetData(`/api/get/Products/${itemId}`)
   const {basketHandler, user} = useContext(LechContext)
   const toast = useToast()
 
-  //Maybe i'll need this fn in the future. Basically it checks if item in the basket already.
-  const checkItems = () => {
-    const item = data?.data
-    user?.basket.map(basket => {
-      if(Object.values(basket).includes(item.id)&&Object.values(basket).includes(selectedSize)){
-        setAlreadyIn(true)
-      }else{
-        console.log("NO")
-        setAlreadyIn(false)
-      }
-    })
-  
-  }
+
   const addBasket = () => {
     if(alreadyIn===false&&selectedColor!=='Color'&&selectedSize!==undefined){
 
@@ -76,7 +65,8 @@ const getSelectedColor = (e) => {
       <div className={styles.product__right}>
         <div className={styles.product__right__wrapper}>
           <div className={styles.product__right__title}>
-            <h1>{data?.data.name}</h1>
+
+            <h1>{data?.data.name || <Skeleton height='20px'/> }</h1>
             <div className={styles.product__right__select}>
               <Select size onGetSelected={getSelectedSize} placeholder="Select a size" list={data?.data.size} />
               <Select onGetSelected={getSelectedColor} placeholder="Color" list={data?.data.colors} />
@@ -84,7 +74,7 @@ const getSelectedColor = (e) => {
           </div>
           <div className={styles.product__right__desc}>
             <Text>
-              {data?.data.description}
+              {data?.data.description || <SkeletonText noOfLines={7}/>}
             </Text>
           </div>
           <div className={styles.product__right__cta}>
@@ -102,7 +92,6 @@ const getSelectedColor = (e) => {
             >
               Add to Cart
             </Button>
-            <Button onClick={checkItems}>Check Item</Button>
           </div>
         </div>
       </div>

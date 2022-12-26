@@ -43,6 +43,7 @@ const Checkout = () => {
       onClose()
     }*/
   }, [user]);
+  console.log(user?.total)
 
   const formHandler = (e) => {
     // address, apartment, city,  district, name, no, zipcode
@@ -98,24 +99,24 @@ const Checkout = () => {
           className={styles.checkout__left}
         >
           <Box className={styles.checkboxWrapper} color="white" h="100%">
-            <Flex p="1rem" w="max-content">
+            <Flex p="1rem" w="100%">
               <Checkbox
                 size="lg"
                 colorScheme="transparent"
                 marginRight="1rem"
               ></Checkbox>
-              <Text className={styles.checkText} fontSize="1.5rem">
+              <Text  className={styles.checkText} fontSize="1.1rem">
                 I've accepted the things that i need to accept
               </Text>
             </Flex>
 
-            <Flex p="1rem" w="max-content">
+            <Flex p="1rem" w="100%">
               <Checkbox
                 size="lg"
                 colorScheme="transparent"
                 marginRight="1rem"
               ></Checkbox>
-              <Text className={styles.checkText} fontSize="1.5rem">
+              <Text className={styles.checkText} fontSize="1.1rem">
                 I've accepted the things that i need to accept
               </Text>
             </Flex>
@@ -200,7 +201,7 @@ const Checkout = () => {
             justifyContent="space-evenly"
           >
             <Text fontSize="1.5rem" color="white">
-              {user.total.toFixed(2) + " TRY"}
+              {user?.total?user?.total.toFixed(2) + " TRY" :"0.00 TRY"}
             </Text>
             <Button h="4rem">Pay</Button>
             <Button h="4rem">

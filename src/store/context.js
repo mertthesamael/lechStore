@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import React, { useEffect, useReducer, useState } from "react";
 import  { collection, addDoc, onSnapshot, query, orderBy, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore";
 import { currentUser, db } from "../config/firestore";
@@ -6,7 +5,6 @@ import { Navigate, useNavigate } from "react-router-dom";
 import reducer from "../components/reducer";
 import { getAuth } from "firebase/auth";
 import { useGetData } from "../hooks/useGetData";
-import { id } from "ethers/lib/utils";
 
 
 const LechContext = React.createContext({
@@ -16,41 +14,9 @@ const LechContext = React.createContext({
 
 export const LechContextWrapper = (props) => {
     
-// WEB3 Codes
-    // const navigate = useNavigate()
+
     const [menuState, setMenuState] = useState(false)
     const [userLoading, setUserLoading] = useState(true)
-    // const [connected, setConnected] = useState(false)
-    // const [userAddr, setUserAddr] = useState("")
-    // const [users, setUsers] = useState()
-    // const newUser = (e, name, mail, phone) => {
-    //     e.preventDefault()
-    //     const dt = new Date()
-    //     addDoc(collection(db,'Users'),{
-    //         addr:userAddr,
-    //         balance:null,
-    //         cart:[],
-    //         signDate: dt.getDate() + "/" + (dt.getMonth() + 1) + "/" + dt.getFullYear(),
-    //         tsx:[],
-    //         contact:[{mail:mail},{phone:phone}],
-    //         name:name
-
-    //     })
-    // }
-    // //Main web3 connection function
-    // const web3Connect = async () => {
-    //     const provider = new ethers.providers.Web3Provider(window.ethereum)
-    //     const signer = provider.getSigner()
-    //     await provider.send("eth_requestAccounts", []);
-    //     let accounts = await provider.send("eth_requestAccounts", []);
-    //     let account = accounts[0];
-    //     const connectedAddress = await signer.getAddress()
-    //     setUserAddr(account)
-    //     setConnected(true)
-        
-    // }
-
-    const [producst, setProducts] = useState()
     const navigate = useNavigate()
     const menuStateHandler = (value) => {
         return setMenuState(value)
@@ -99,7 +65,6 @@ export const LechContextWrapper = (props) => {
        console.log(user.address)
     
     },[userData])
-console.log(Math.abs(32) * -1)
     const userHandler = (user,state) => {
  
         dispatch({
@@ -187,7 +152,6 @@ console.log(Math.abs(32) * -1)
             
         }).then(()=> refetch())
       
-        console.log(userData, user)
     }
     return(
         <LechContext.Provider value={{
@@ -196,7 +160,6 @@ console.log(Math.abs(32) * -1)
             onMenuState:menuStateHandler,
             onSetUser:userHandler,
             user:user,
-            producst:producst,
             basketHandler:userUpdate,
             deleteItem:deleteItem,
             addressHandler:userUpdateAddress,

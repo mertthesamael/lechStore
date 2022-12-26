@@ -2,12 +2,15 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
+  Box,
+  Flex,
   Input,
+  Text,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { login } from "../../config/firestore";
 import { LechContext } from "../../store/context";
-
+import styles from "./loginform.module.scss"
 const LoginForm = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -45,26 +48,32 @@ const LoginForm = () => {
     }
   };
   return (
-    <form onSubmit={loginHandler}>
+    <form className={styles.loginForm} onSubmit={loginHandler}>
       {error && (
         <Alert status="error">
           <AlertIcon />
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
-
+      <Flex flexDir='column' w='100%' alignItems='flex-start'>
+      <Text pos='relative' left='0.3rem' marginBottom='5px' fontWeight='bold'>Email</Text>
       <Input
         isInvalid={mailErr}
         onChange={mailHandler}
         placeholder="e-mail"
         type="mail"
-      ></Input>
+        ></Input>
+        </Flex>
+        <Flex flexDir='column' w='100%' alignItems='flex-start'>
+        <Text pos='relative' left='0.3rem' marginBottom='5px' fontWeight='bold'>Password</Text>
+
       <Input
         isInvalid={passErr}
         onChange={passwordHandler}
         placeholder="password"
         type="password"
-      ></Input>
+        ></Input>
+        </Flex>
       <Input
         type="submit"
         _hover={{
@@ -75,6 +84,7 @@ const LoginForm = () => {
         color="white"
         w="5rem"
         h="3rem"
+        value='Login'
       ></Input>
     </form>
   );

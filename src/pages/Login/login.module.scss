@@ -15,7 +15,8 @@
         background-color: white;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 5rem;
 
         &__ctaSignup{
             display: flex;
@@ -42,5 +43,23 @@
         }
       
       
+    }
+}
+
+
+@media screen and (max-width: 1024px){
+    .login{
+        
+        &__wrapper{
+            width: 50%;
+        }
+    }
+}
+@media screen and (max-width: 720px){
+    .login{
+
+        &__wrapper{
+            width: 90%;
+        }
     }
 }

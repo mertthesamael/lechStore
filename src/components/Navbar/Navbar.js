@@ -93,7 +93,6 @@ const Navbar = () => {
           </Box>
         ) : (
           <NavLink to="/login">
-            <FontAwesomeIcon className={styles.loginIcon} color='#C31433' icon={faUser}/>
             <Button
               className={styles.loginBtn}
               _hover={{
@@ -104,7 +103,9 @@ const Navbar = () => {
               color="white"
               p="1rem 3rem"
             >
-              Login
+              
+              <FontAwesomeIcon className={styles.loginIcon} color='#C31433' icon={faUser}/>
+             <Text className={styles.loginText}>Login</Text>
             </Button>
           </NavLink>
         )}
