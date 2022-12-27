@@ -1,9 +1,10 @@
-import { Image, Text, Button, useToast, SkeletonText,Skeleton } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { Image, Text, Button, useToast, SkeletonText,Skeleton, SkeletonCircle } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
 import { useGetData } from "../../hooks/useGetData";
 import { LechContext } from "../../store/context";
 import Select from "../Select/Select";
 import styles from "./item.module.scss";
+import { useNavigate } from "react-router-dom";
 
 
 const Product = ({itemId}) => {
@@ -12,11 +13,15 @@ const Product = ({itemId}) => {
   const [selectedColor, setSelectedColor] = useState()
   const [selectedSize, setSelectedSize] = useState()
   const [alreadyIn, setAlreadyIn] = useState(false)
-  const { data, isLoading } = useGetData(`/api/get/Products/${itemId}`)
+  const { data, isLoading, status } = useGetData(`/api/get/Products/${itemId}`)
   const {basketHandler, user} = useContext(LechContext)
+  const navigate = useNavigate()
   const toast = useToast()
 
-
+//Navigate to Not Found Page
+if(data?.status == 404){
+  navigate('/404')
+}
   const addBasket = () => {
     if(alreadyIn===false&&selectedColor!=='Color'&&selectedSize!==undefined){
 
@@ -59,7 +64,7 @@ const getSelectedColor = (e) => {
       {data?.data.itemOfWeek&&<div className={styles.product__banner}>Item Of The Week</div>}
       <div className={styles.product__left}>
         <div className={styles.product__left__img}>
-          <Image src={selectedColor?.includes('Color')==false? data?.data.images.filter(x=>x.color==selectedColor)[0]?.img:data?.data.images[0].img} />
+         {isLoading? <SkeletonCircle borderRadius='0' h='30rem' w='20rem'></SkeletonCircle> : <Image src={selectedColor?.includes('Color')==false? data?.data.images.filter(x=>x.color==selectedColor)[0]?.img:data?.data.images[0].img} />}
         </div>
       </div>
       <div className={styles.product__right}>
@@ -79,7 +84,7 @@ const getSelectedColor = (e) => {
           </div>
           <div className={styles.product__right__cta}>
             <Text fontSize="25px" fontWeight="700" marginRight="2rem">
-             {data?.data.price + " TRY"}
+             {isLoading? <Skeleton height='20px'/> : data?.data.price + " TRY"}
             </Text>
             <Button
               onClick={addBasket}

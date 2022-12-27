@@ -7,6 +7,7 @@ import {
     Text,
     Stack,
     Image,
+    Skeleton,
   } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -87,7 +88,7 @@ import styles from "./card.module.scss"
               <Text color='white' fontSize='20px'>ITEM OF THE WEEK !</Text>
             </Box>}
             <Heading fontSize={'2xl'} fontFamily={'body'} color='black' fontWeight={500}>
-              {name}
+              {name || <Skeleton></Skeleton>}
             </Heading>
             <Stack direction={'row'} align={'center'}>
               <Text color='black' fontWeight={800} fontSize={'3xl'}>

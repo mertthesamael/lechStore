@@ -15,8 +15,8 @@ const Menu = () => {
         <div className={styles.menu} style={ctx.menuState?{left:'0rem'}:{left:'-50rem'}}>
             <div className={styles.menu__items}>
             <NavLink onClick={stateHandler} to='/products'>Products</NavLink>
-            <NavLink onClick={stateHandler} to='/item'>Item Page</NavLink>
             <NavLink onClick={stateHandler} to='/about'>About</NavLink>
+            {ctx.user.loggedIn&&<NavLink onClick={stateHandler} to='/profile'>Profile</NavLink>}
             </div>
         </div>
     )

@@ -18,6 +18,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import NotFound from "./pages/NotFound/NotFound";
 const App = () => {
 
 const queryClient = new QueryClient()
@@ -39,6 +40,7 @@ const queryClient = new QueryClient()
             <Route path="/profile" element={<Profile />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Login />} />
+            <Route path='/404'element={<NotFound />} />
           </Routes>
         </Body>
       </Wrapper>

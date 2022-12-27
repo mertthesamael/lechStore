@@ -15,6 +15,7 @@ import { LechContext } from "../../store/context";
 import styles from "./navbar.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 const Navbar = () => {
   const { onMenuState, user, menuState, onSetUser } = useContext(LechContext);
@@ -46,7 +47,7 @@ const Navbar = () => {
     <header className={styles.navbar}>
       <div onClick={menuHandler} className={styles.navbar__menu}>
         <div className={styles.navbar__menuwrapper + " menuicon"}>
-          <div className={styles.navbar__menu__bar + " menuicon"}></div>
+          <HamburgerIcon boxSize='2rem' color='#C31433'></HamburgerIcon>
         </div>
       </div>
       <NavLink to="/" className={styles.navbar__logo}>
@@ -54,8 +55,8 @@ const Navbar = () => {
       </NavLink>
       <div className={styles.navbar__connect}>
         {user.loggedIn ? (
-          <Box display="flex" position="relative" alignItems="center">
-            <NavLink to='/checkout'>
+          <Box  display="flex" position="relative" alignItems="center">
+            <NavLink className={styles.basketWrapper} to='/checkout'>
 
             <Image
               marginRight="1rem"
@@ -66,19 +67,20 @@ const Navbar = () => {
             <span className={styles.navbar__user__basket}>
               {user?.basket?.length}
             </span>
-            
+            <Box className={styles.navbar__profileWrapper}>
+
             <Menu>
               <MenuButton
               className={styles.loginBtn}
-                as={Button}
-                _hover={{
-                  color: "#C31433",
-                  backgroundColor: "RGBA(0, 0, 0, 0.16)",
+              as={Button}
+              _hover={{
+                color: "#C31433",
+                backgroundColor: "RGBA(0, 0, 0, 0.16)",
                 }}
                 bgColor="#C31433"
                 color="white"
                 p="1rem 3rem"
-              >
+                >
             <FontAwesomeIcon className={styles.loginIcon} color='#C31433' icon={faUser}/>
 
                 <Text className={styles.userName}>{user?.name}</Text>
@@ -90,6 +92,7 @@ const Navbar = () => {
                 </MenuItem>
               </MenuList>
             </Menu>
+            </Box>
           </Box>
         ) : (
           <NavLink to="/login">

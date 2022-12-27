@@ -108,6 +108,10 @@
     display: flex;
 
   }
+  &__profileWrapper{
+   display: none;
+  }
+  
   & .userName{
     display: none;
   }
@@ -117,7 +121,7 @@
     place-items: center;
     border: 2px solid $lech-primary;
     padding: 0;
-   
+    
     & .loginText{
       display: none;
     }
