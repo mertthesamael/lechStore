@@ -19,11 +19,12 @@ const Product = ({itemId}) => {
   const toast = useToast()
 
 //Navigate to Not Found Page
+console.log(user)
 if(data?.status == 404){
   navigate('/404')
 }
   const addBasket = () => {
-    if(alreadyIn===false&&selectedColor!=='Color'&&selectedSize!==undefined){
+    if(alreadyIn===false&&selectedColor!=='Color'&&selectedSize!==undefined&&user?.loggedIn == true){
 
       basketHandler(user.uid, itemId,selectedSize,selectedColor,data?.data.price)
       toast({
@@ -32,6 +33,15 @@ if(data?.status == 404){
         status: 'success',
         duration: 3000,
         isClosable: true,
+      })
+    }if(user?.loggedIn == false){
+      toast({
+        title: 'Error',
+        description: "Please login first",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position:'top'
       })
     }else{
 

@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import reducer from "../components/reducer";
 import { getAuth } from "firebase/auth";
 import { useGetData } from "../hooks/useGetData";
+import axios from "axios";
 
 
 const LechContext = React.createContext({

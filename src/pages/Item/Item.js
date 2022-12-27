@@ -1,8 +1,5 @@
-import { doc, getDoc } from "firebase/firestore";
-import { Suspense, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Product from "../../components/Product/Product";
-import { db } from "../../config/firestore";
 
 import styles from "./item.module.scss"
 
