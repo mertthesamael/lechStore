@@ -1,4 +1,23 @@
-# Under Development
+# Under Development.....
+
+# Lech Store
+
+![image](https://user-images.githubusercontent.com/79616834/209731785-f45bffce-2cc3-4566-ae6a-b51581347607.png)
+
+#### ReactJS
+#### ChakraUI
+#### React Router
+#### Firebase (auth/database)
+#### NodeJS / Express (API)
+Yet another e-commerce app. I work with ReactJS and ChakraUI on forntend, also coded some backend for firestore API. Also auth from firebase.
+
+
+![image](https://user-images.githubusercontent.com/79616834/209732076-ec601e43-d525-4d4c-9c52-61ca1c2d96a4.png)
+![image](https://user-images.githubusercontent.com/79616834/209732360-d2fe6784-2102-4b63-afba-b54480661361.png)
+## Currently there is no working payment sequence, but there will 2 option like traditional creadit card / or with your web3 wallet.
+![image](https://user-images.githubusercontent.com/79616834/209732166-74a66b60-1970-495d-936b-107148b9763f.png)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
