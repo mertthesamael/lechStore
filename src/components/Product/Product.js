@@ -24,7 +24,7 @@ if(data?.status == 404){
   navigate('/404')
 }
   const addBasket = () => {
-    if(alreadyIn===false&&selectedColor!=='Color'&&selectedSize!==undefined&&user?.loggedIn == true){
+    if(alreadyIn===false&&selectedColor!=='Color'&&selectedSize!==undefined&&user.loggedIn == true){
 
       basketHandler(user.uid, itemId,selectedSize,selectedColor,data?.data.price)
       toast({
@@ -34,7 +34,7 @@ if(data?.status == 404){
         duration: 3000,
         isClosable: true,
       })
-    }if(user?.loggedIn == false){
+    }else if(user?.loggedIn == false){
       toast({
         title: 'Error',
         description: "Please login first",
