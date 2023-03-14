@@ -56,7 +56,11 @@ export const LechContextWrapper = (props) => {
 
         return result()
   }
+  useEffect(()=>{
+    setUserLoading(true)
+    checkLogin()
 
+},[])
     const userHandler = (user,state) => {
  
         dispatch({
