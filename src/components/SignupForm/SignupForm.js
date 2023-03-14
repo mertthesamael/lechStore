@@ -24,6 +24,12 @@ const SignupForm = () => {
   const signupHandler = async (e) => {
     e.preventDefault();
     const user = await register(email, password, name);
+    if(password!=e.target.verifyPassword.value){
+      toast({
+        status:'error',
+        description:'Password is not matching.'
+      })
+    }
     if(user.accessToken){
       await onSetUser(user, true);
       
@@ -52,7 +58,6 @@ const SignupForm = () => {
       }
     } else {
         setError({password:false, mail:false, msg:''})
-
     }
   };
 
@@ -62,7 +67,7 @@ const SignupForm = () => {
       <Input onChange={nameHandler} name='name' type="text" placeholder="Full Name"></Input>
       <Input onChange={mailHandler} isInvalid={error.mail} name='mail' type="mail" placeholder="Email Address"></Input>
       <Input onChange={passwordHandler}isInvalid={error.password} name='password' type="password" placeholder="Password"></Input>
-      <Input type="password" placeholder="Confirm Password"></Input>
+      <Input type="password" name='verifyPassword' placeholder="Confirm Password"></Input>
       <Checkbox colorScheme="red">I've read the things idk</Checkbox>
       <Input
         type="submit"
