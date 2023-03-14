@@ -56,16 +56,7 @@ export const LechContextWrapper = (props) => {
 
         return result()
   }
-    useEffect(()=>{
-        setUserLoading(true)
-        checkLogin()
-      
-       if(userLoading === false && user.loggedIn == false){
-        navigate("/login")
-       }
-       console.log(user.address)
-    
-    },[userData])
+
     const userHandler = (user,state) => {
  
         dispatch({
